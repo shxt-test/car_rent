@@ -8,8 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>权限管理系统---嘿嘿</title>
+  </head>
   <body>
        <%
         request.getRequestDispatcher("/jsp/login.jsp").forward(request,response); 
