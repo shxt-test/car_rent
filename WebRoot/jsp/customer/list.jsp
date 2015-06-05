@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,13 +8,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-
-    <title>汽车租赁管理系统</title>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> | </title>
+    <script type="text/javascript">
+    	
+    </script>
   </head>
+  
   <body>
-       <%
-        request.getRequestDispatcher("/jsp/login.jsp").forward(request,response); 
-        %>
+   <h1>www.ccshxt.com</h1><br>
   </body>
 </html>
