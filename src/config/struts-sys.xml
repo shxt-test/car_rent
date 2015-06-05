@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="system-default" namespace="/sys" extends="shxt-default">
+        <!-- 关于登录操作 -->
+        <action name="*LoginAction" class="loginAction" method="{1}">
+            <result name="dispatcher">/jsp/${toJsp}.jsp</result>
+            <result name="redirectAction" type="redirectAction">${toAction}</result>
+        </action>
+        
+        <!-- 关于用户操作 -->
+        <action name="*UserAction" class="userAction" method="{1}">
+            <result name="dispatcher">/jsp/${toJsp}.jsp</result>
+            <result name="redirect" type="redirect">/jsp/${toJsp}.jsp</result>
+            <result name="json" type="json">
+                 <param name="root">jsonResult</param>
+            </result>
+        </action>
+        
+        
+        <!-- 关于菜单操作 -->
+        <action name="*MenuAction" class="menuAction" method="{1}">
+            <result name="dispatcher">/jsp/${toJsp}.jsp</result>
+            <result name="redirect" type="redirect">/jsp/${toJsp}.jsp</result>
+             <result name="json" type="json">
+                <param name="root">jsonResult</param>
+            </result>
+           
+        </action>
+        
+         <!--关于字典的操作 
+      <action name="*DictAction" class="com.shxt.framework.dict.action.DictAction" method="{1}">
+            <result name="json" type="json">
+                <param name="root">jsonResult</param>
+            </result>
+        </action>  -->
+     <!-- 关于角色操作 -->
+       <action name="*RoleAction" class="roleAction" method="{1}">
+        <result name="dispatcher">/jsp/${toJsp}.jsp</result>
+        <result name="redirect" type="redirect">/jsp/${toJsp}.jsp</result>
+         <result name="json" type="json">
+                <param name="root">jsonResult</param>
+            </result>
+       </action>
+    </package>
+    
+
+   
+
+</struts>

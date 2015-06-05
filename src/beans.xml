@@ -126,4 +126,11 @@
             <property name="userService" ref="userServiceImpl"></property>
         </bean>
         
+        <!-- 加载 -->
+        <import resource="config/beans-hhq.xml"/>
+        <import resource="config/beans-jyz.xml"/>
+        <import resource="config/beans-wsj.xml"/>
+        <import resource="config/beans-hzq.xml"/>
+        <import resource="config/beans-wzw.xml"/>
+        
 </beans>
