@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="shxt-default" location="228,10" size="170,70" />
+  <package name="system-default" location="173,115" size="525,350">
+    <action name="*LoginAction" location="65,47" size="150,62">
+      <result name="dispatcher">
+        <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="redirectAction" />
+    </action>
+    <action name="*UserAction" location="65,162" size="150,41">
+      <result name="dispatcher">
+        <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="json" />
+    </action>
+    <action name="*MenuAction" location="65,267" size="150,41">
+      <result name="dispatcher">
+        <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="redirect">
+        <resourceEdge source="redirect" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="json" />
+    </action>
+    <action name="*RoleAction" location="0,0" size="0,0">
+      <result name="dispatcher">
+        <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="redirect">
+        <resourceEdge source="redirect" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="json" />
+    </action>
+  </package>
+  <webResource name="${toJsp}.jsp" path="/jsp/${toJsp}.jsp" location="9,240" size="150,55" />
+  <extendsEdge source="system-default" target="shxt-default" routing="0" />
+</Struts2Diagram>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="303.SSHXML权限管理系统github"
+  id="myeclipse.1431237674608"
+  context-root="/rbac"
+  j2ee-spec="5.0"
+  archive="303.SSHXML权限管理系统github.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
