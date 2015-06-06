@@ -20,6 +20,9 @@
       
       </bean>
       
+      <bean id="customerTypeAction" class="com.shxt.framework.customertype.action.CustomerTypeAction">
+            <property name="customerTypeService" ref="customerTypeServiceImpl"></property>
+      </bean>
       
       <!-- 客户类型管理 结束 -->
         

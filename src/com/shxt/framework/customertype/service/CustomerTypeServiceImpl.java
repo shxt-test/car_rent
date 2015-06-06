@@ -24,8 +24,8 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 	}
 
 	public List<CustomerType> list() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from car_customer_type";
+		return (List<CustomerType>) this.baseDao.listSQL(sql, CustomerType.class, false);
 	}
 
 	public void update(CustomerType customerType) {

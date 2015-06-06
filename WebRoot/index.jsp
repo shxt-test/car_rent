@@ -10,7 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <title>汽车租赁管理系统</title>
   </head>
-  
   <body>
        <%
         request.getRequestDispatcher("/jsp/login.jsp").forward(request,response); 

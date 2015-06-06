@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>欢迎登录后台管理系统</title>
+    <title>欢迎登录汽车租凭管理系统</title>
 <link href="<%=path %>/resource/admin/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=path %>/resource/admin/js/jquery.js"></script>
 <script src="<%=path %>/resource/admin/js/cloud.js" type="text/javascript"></script>
@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 顶部导航 -->
     <div class="logintop">
-        <span>欢迎登录后台管理界面平台</span>
+        <span>欢迎登录汽车租凭后台管理界面平台</span>
         <ul>
             <li><a href="javascript:void(0)">帮助</a></li>
             <li><a href="javascript:void(0)">关于</a></li>
