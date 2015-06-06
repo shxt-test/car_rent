@@ -4,9 +4,10 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <package name="system-default" namespace="/sys" extends="shxt-default">
+    <package name="hhq" namespace="/sys" extends="shxt-default">
         <action name="*CustomerAction" class="customerAction" method="{1}">
             <result name="dispatcher">/jsp/${toJsp}.jsp</result>
+            <result name="redirect" type="redirect">/jsp/${toJsp}.jsp</result>
         </action>
     </package>
 

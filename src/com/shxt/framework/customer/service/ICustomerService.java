@@ -2,7 +2,10 @@ package com.shxt.framework.customer.service;
 
 import java.util.List;
 
+import com.shxt.base.dao.PageBean;
 import com.shxt.framework.carinfo.model.CarInfo;
+import com.shxt.framework.customer.model.CustomerInfo;
+import com.shxt.framework.customer.query.CustomerQuery;
 
 public interface ICustomerService {
 	/**
@@ -18,6 +21,8 @@ public interface ICustomerService {
 	
 	public void delete(Integer type_id);
 	
-	public List<CarInfo> list();
+	public List<CustomerInfo> list();
+	
+	public PageBean find(CustomerQuery query ,PageBean pageBean);
 
 }
