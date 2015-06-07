@@ -58,7 +58,6 @@ public class UserAction extends BaseAction {
 	public String find(){
 
 		if(pageBean==null){
-			System.out.println("====");
 			pageBean = new PageBean();
 		}
 

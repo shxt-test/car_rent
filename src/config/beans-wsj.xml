@@ -19,9 +19,13 @@
             <property name="baseDao" ref="baseDaoImpl"></property>
       
       </bean>
+<<<<<<< HEAD
       <bean id="customerTypeAction" class="com.shxt.framework.customertype.action.CustomerTypeAction">
             <property name="customerTypeService" ref="customerTypeServiceImpl"></property>
       </bean>
+=======
+      
+>>>>>>> refs/remotes/origin/lwm
       
       <!-- 客户类型管理 结束 -->
         
