@@ -19,13 +19,15 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 	}
 
 	public void delete(Integer typeId) {
-		// TODO Auto-generated method stub
-
+		System.out.println(111);
 	}
 
 	public List<CustomerType> list() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String sql = "select * from customer_type";
+		System.out.println(sql);
+		return (List<CustomerType>) this.baseDao.listSQL(sql, CustomerType.class, true);
+
 	}
 
 	public void update(CustomerType customerType) {

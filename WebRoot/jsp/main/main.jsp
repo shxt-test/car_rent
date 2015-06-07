@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>信息管理系统界面</title>
+    <title>汽车租凭管理系统界面</title>
     <link href="<%=path %>/resource/admin/css/style.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         * { padding:0; margin:0; }

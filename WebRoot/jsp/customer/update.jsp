@@ -224,10 +224,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li><label>联系方式</label><input name="cusInfo.cus_tel" id="cus_tel" type="text" class="mdfinput" onblur="checkMobile()" value="${cusInfo.cus_tel}"/><span id="telmessage"></span></li>
             <li><label>驾驶证号码</label><input name="cusInfo.cus_driver_code" id="cus_driver_code" type="text" class="mdfinput" value="${cusInfo.cus_driver_code}" /></li>
             <li><label>性别</label>
-           <s:select list="#{'男':'男','女':'女'}" id="cus_sex" cssClass="select_show" cssstyle="width: 150px;" headerKey="" headerValue="请选择性别"
+           <s:select list="#{'男':'男','女':'女'}" id="cus_sex" cssClass="select_show" cssStyle="width: 150px;" headerKey="" headerValue="请选择性别"
             name="cusInfo.cus_sex"
             ></s:select>
             </li>
+            <li><label>客户类型</label>
+                <s:select name="cusInfo.customer_type.c_type_id" id="c_type_id" list="cusTypeList" listKey="c_type_id" listValue="c_type_name" cssClass="select_show" headerKey="" headerValue="请选择角色"></s:select>
+            </li> 
         <li>---------------------------------------担保人信息-----------------------------------------------------</li>
             <li><label>身份证号码</label><input name="cusInfo.gua_id_card" id="gua_id_card" type="text" class="mdfinput" style="width: 400px;" onblur="isIDno()" value="${cusInfo.gua_id_card}"/><span id="message"></span></li>
             <li><label>姓名</label><input name="cusInfo.gua_name" id="gua_name" type="text" class="mdfinput" value="${cusInfo.gua_name}"/></li>
@@ -235,8 +238,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li><label>工作单位</label><input name="cusInfo.gua_work_address" id=" gua_work_address" type="text" class="mdfinput" value="${cusInfo.cus_work_address}"/></li>
             <li><label>联系方式</label><input name="cusInfo.gua_tel" id="gua_tel" type="text" class="mdfinput" onblur="checkMobile()" value="${cusInfo.gua_tel}"/><span id="telmessage"></span></li>
             <li><label>与客户关系</label><input name="cusInfo.relation" id="relation" type="text" class="mdfinput" value="${cusInfo.relation}" /></li>
-            <li><label>客户类型</label>
-            </li> 
             </ul>
             <li><label>&nbsp;</label><input  type="submit" class="mbtn" value="确认保存"/></li>
             

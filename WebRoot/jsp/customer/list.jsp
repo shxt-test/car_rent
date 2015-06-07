@@ -156,7 +156,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return;
             }
         }
-       
+       function toguaInfoDialog(){
+    	   
+	    	 var d =top.dialog({
+	    		width:300,
+	            height:200,
+	            title: '欢迎',
+	            content: '欢迎'
+	            });
+	        d.show();
+	       }
         
         function toAllocationRole(){
               //判断该用户选择
@@ -260,7 +269,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><s:property value="#cus.cus_address"/></td>
                     <td><s:property value="#cus.cus_work_address"/></td>
                     <td><s:property value="#cus.cus_id_card"/></td>
-                    <td><s:property value="#cus.customer_type"/></td>
+                    <td><s:property value="#cus.customer_type.c_type_name"/></td>
                     <td><s:property value="#cus.cus_driver_code"/></td>
                     <td>
                          <s:if test="#cus.cus_status==1">

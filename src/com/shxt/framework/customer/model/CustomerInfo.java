@@ -44,7 +44,7 @@ public class CustomerInfo implements Serializable {
 	  private CustomerType customer_type;
 	  /**审核是否通过 默认通过，因为没有网页*/
 	  private String verify="1";
-	  /***/
+	  /**状态 1可用，2不可用*/
 	  private String cus_status = "1";
 	public Integer getCus_id() {
 		return cus_id;

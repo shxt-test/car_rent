@@ -9,6 +9,7 @@ import com.shxt.base.dao.PageBean;
 import com.shxt.framework.customer.model.CustomerInfo;
 import com.shxt.framework.customer.query.CustomerQuery;
 import com.shxt.framework.customer.service.ICustomerService;
+import com.shxt.framework.customertype.model.CustomerType;
 import com.shxt.framework.customertype.service.ICustomerTypeService;
 
 public class CustomerAction extends BaseAction {
@@ -17,7 +18,7 @@ public class CustomerAction extends BaseAction {
 
 	private PageBean pageBean;
 
-	private List<CustomerInfo> cusList;
+	private List<CustomerType> cusTypeList;
 
 	private CustomerInfo cusInfo;
 
@@ -49,8 +50,11 @@ public class CustomerAction extends BaseAction {
 	 * @return
 	 */
 	public String toAdd(){
-		
-	
+		try {
+			cusTypeList = customerTypeService.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		this.toJsp="customer/add";
 		return DISPATCHER;
 	}
@@ -59,6 +63,10 @@ public class CustomerAction extends BaseAction {
 	 */
 	public String add(){
 		try{
+			
+			if(cusInfo.getCustomer_type().getC_type_id()==null){
+				cusInfo.setCustomer_type(null);
+			}
 			customerService.add(cusInfo);
 			this.message="客户添加成功,谢谢合作!";
 			this.flag = "success";
@@ -72,11 +80,21 @@ public class CustomerAction extends BaseAction {
 		return DISPATCHER;
 
 	}
+	/**
+	 * 更新跳转
+	 * @return
+	 */
 	public String toUpdate(){
+		
+		cusTypeList = customerTypeService.list();
 		cusInfo = customerService.toUpdate(cus_id);
 		this.toJsp="customer/update";
 		return DISPATCHER;
 	}
+	/**
+	 * 更新客户
+	 * @return
+	 */
 	public String update(){
 		try{
 			customerService.update(cusInfo);
@@ -91,7 +109,10 @@ public class CustomerAction extends BaseAction {
 		this.toJsp="message";
 		return DISPATCHER;
 	}
-	
+	/**
+	 * 更新状态
+	 * @return
+	 */
 	public String toUpdateStatus(){
 		System.out.println(1);
 
@@ -117,13 +138,7 @@ public class CustomerAction extends BaseAction {
 		this.pageBean = pageBean;
 	}
 
-	public List<CustomerInfo> getCusList() {
-		return cusList;
-	}
-
-	public void setCusList(List<CustomerInfo> cusList) {
-		this.cusList = cusList;
-	}
+	
 
 	public CustomerInfo getCusInfo() {
 		return cusInfo;
@@ -148,6 +163,16 @@ public class CustomerAction extends BaseAction {
 	public void setCus_id(Integer cusId) {
 		cus_id = cusId;
 	}
+
+	public List<CustomerType> getCusTypeList() {
+		return cusTypeList;
+	}
+
+	public void setCusTypeList(List<CustomerType> cusTypeList) {
+		this.cusTypeList = cusTypeList;
+	}
+
+	
 	
 
 
