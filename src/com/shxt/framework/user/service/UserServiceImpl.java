@@ -38,8 +38,6 @@ public class UserServiceImpl implements IUserService {
 		
 		hql += " order by u.user_id desc";
 		
-		System.out.println(hql);
-		
 		return this.baseDao.find(hql, pageBean);
 	}
 

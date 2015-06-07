@@ -4,6 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+    
     <package name="wsj" namespace="/sys" extends="shxt-default">
     <!-- 汽车类型 -->
         <action name="*CustomerTypeAction" class="customerTypeAction" method="{1}">

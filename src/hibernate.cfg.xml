@@ -13,7 +13,7 @@
 	<property name="hibernate.connection.password">root</property>
 	<!--设置数据库的连接url:jdbc:mysql://127.0.0.1:端口号/数据库名-->
 	<property name="hibernate.connection.url">
-		jdbc:mysql://127.0.0.1:3306/ly24_rbac
+		jdbc:mysql://127.0.0.1:3306/rbac
 	</property>
 	<!--数据库连接池的大小-->
 	<property name="hibernate.connection.pool.size">5</property>

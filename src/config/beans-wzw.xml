@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:tx="http://www.springframework.org/schema/tx"
-        xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -14,5 +14,15 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
       
+   <!-- 汽车信息管理 开始 -->
+      <!-- 汽车信息配置 -->
+      <bean id="carInfoServiceImpl" class="com.shxt.framework.carinfo.service.CarInfoServiceImpl">
+            <property name="baseDao" ref="baseDaoImpl"></property>
+      </bean>
+      <bean id="carInfoAction" class="com.shxt.framework.carinfo.action.CarInfoAction">
+            <property name="carInfoService" ref="carInfoServiceImpl"></property>
+      </bean>
+      
+   <!-- 汽车信息管理 结束 -->
         
 </beans>

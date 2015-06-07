@@ -17,7 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  <div style="height: 800px;width: 1000px;">
    <h1>www.ccshxt.com</h1><br>
    <s:debug></s:debug>
+  </div>
+  
   </body>
 </html>

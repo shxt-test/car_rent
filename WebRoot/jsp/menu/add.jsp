@@ -22,7 +22,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				          dialog.close(data.flag);
 				          dialog.remove();
         		}else{
-        			alert(data.message);
         			$("#menu_name").focus();
         			return false;
         		}

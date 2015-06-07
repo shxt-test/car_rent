@@ -6,42 +6,40 @@ import java.util.Date;
 import com.shxt.framework.cartype.model.CarType;
 
 public class CarInfo implements Serializable {
-	 /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -1697685073413309618L;
 	/**车辆主键ID*/
-	  private Integer car_id;
-	  /**车牌号码，唯一的*/
-	  private String car_code;
-	  /**车辆名称*/
-	  private String car_name;
-	  /**租借金额，一般情况下都是整数*/
-	  private Integer rent_price;
-	  /**车辆颜色*/
-	  private String car_color;
-	  /**购买价格*/
-	  private String buy_price;
-	  /**车辆保证金*/
-	  private Integer deposit=5000;
-	  /**汽车行驶公里数*/
-	  private String km;
-	  /**登记人的姓名*/
-	  private String create_user_name;
-	  /**车辆状态1:可租 2:预定 3:维修 4:报废 5:租赁*/
-	  private String car_status = "1";
-	  /**预定日期*/
-	  private Date reserve_date;
-	  /**预定人姓名*/
-	  private String reserve_user_name;
-	  /**预定人联系方式*/
-	  private String reserve_tel;
-	  /**车辆类型*/
-	  private CarType carType;
-	  /**车辆封页，上传操作*/
-	  private String photo;
-	  /**车辆描述，注意事项*/
-	  private String car_desc;
+	private Integer car_id;
+	/**车牌号码，唯一的*/
+	private String car_code;
+	/**车辆名称*/
+	private String car_name;
+	/**租借金额，一般情况下都是整数*/
+	private Integer rent_price;
+	/**车辆颜色*/
+	private String car_color;
+	/**购买价格*/
+	private String buy_price;
+	/**车辆保证金*/
+	private Integer deposit=5000;
+	/**汽车行驶公里数*/
+	private String km;
+	/**登记人的姓名*/
+	private String create_user_name;
+	/**车辆状态1:可租 2:预定 3:维修 4:报废 5:租赁*/
+	private String car_status = "1";
+	/**预定日期*/
+	private Date reserve_date;
+	/**预定人姓名*/
+	private String reserve_user_name;
+	/**预定人联系方式*/
+	private String reserve_tel;
+	/**车辆类型*/
+	private CarType carType;
+	/**车辆封页，上传操作*/
+	private String photo;
+	/**车辆描述，注意事项*/
+	private String car_desc;
 	public Integer getCar_id() {
 		return car_id;
 	}
