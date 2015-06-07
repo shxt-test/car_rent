@@ -11,6 +11,17 @@
       <result name="json" />
     </action>
   </package>
+  <package name="wsj" location="0,0" size="0,0">
+    <action name="*CustomerTypeAction" location="0,0" size="0,0">
+      <result name="dispatcher">
+        <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="redirect">
+        <resourceEdge source="redirect" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="json" />
+    </action>
+  </package>
   <webResource name="${toJsp}.jsp" path="/jsp/${toJsp}.jsp" location="0,0" size="0,0" />
 </Struts2Diagram>
 

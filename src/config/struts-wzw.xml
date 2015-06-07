@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-<<<<<<< HEAD
+
     <package name="wzw" namespace="/sys" extends="shxt-default">
         <!-- 汽车信息管理 -->
         <action name="*CarInfoAction" class="carInfoAction" method="{1}">
@@ -16,11 +16,5 @@
         </action>
     </package>
     
-=======
-    
-    
 
-   
-
->>>>>>> refs/remotes/origin/lwm
 </struts>

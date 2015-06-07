@@ -8,13 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-<<<<<<< HEAD
-    <title>汽车租赁管理系统</title>
-=======
 
     <title>汽车租赁管理系统</title>
 
->>>>>>> refs/remotes/origin/lwm
   </head>
   <body>
        <%

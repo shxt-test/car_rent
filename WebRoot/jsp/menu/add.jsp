@@ -14,7 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <link href="<%=path %>/resource/admin/css/style.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function toSub(){
-        	alert($("#menuForm").serialize())
         	$.post("sys/addMenuAction.action",$("#menuForm").serialize(),function(data){
         		
         		if(data.flag=="success"){

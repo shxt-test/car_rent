@@ -42,11 +42,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public void add(User user) {
-		try {
+		
 			this.baseDao.add(user);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
 	}
 	public void update(User user){
 		

@@ -9,6 +9,9 @@ import com.shxt.framework.customertype.service.ICustomerTypeService;
 
 public class CustomerTypeAction extends BaseAction{
 	
+
+	private static final long serialVersionUID = 5754173761067485164L;
+
 	private Integer c_type_id;
 	
 	private String c_type_name;
@@ -27,7 +30,6 @@ public class CustomerTypeAction extends BaseAction{
 	
 	public String list(){
 		try {
-			System.out.println("123");
 			this.customerTypeService.list();
 			this.toJsp = "customertype/list";
 		} catch (Exception e) {
