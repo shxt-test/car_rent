@@ -7,6 +7,7 @@ import com.shxt.base.dao.PageBean;
 import com.shxt.framework.carinfo.model.CarInfo;
 import com.shxt.framework.customer.model.CustomerInfo;
 import com.shxt.framework.customer.query.CustomerQuery;
+import com.shxt.framework.user.model.User;
 
 public class CustomerServiceImpl implements ICustomerService {
 	IBaseDao baseDao;
@@ -78,6 +79,20 @@ public class CustomerServiceImpl implements ICustomerService {
 		oldCusInfo.setGua_work_address(cusInfo.getGua_work_address());
 		
 		this.baseDao.update(oldCusInfo);
+		
+	}
+
+
+	public void updateStatus(Integer cusId) {
+		CustomerInfo cusInfo =  (CustomerInfo) this.baseDao.load(CustomerInfo.class, cusId);
+		if(cusInfo.getCus_status().equals("1")){
+			cusInfo.setCus_status("2");
+			
+		}else{
+			cusInfo.setCus_status("1");
+			
+		}
+		this.baseDao.update(cusInfo);
 		
 	}
 

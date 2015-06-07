@@ -9,6 +9,7 @@ import com.shxt.base.dao.PageBean;
 import com.shxt.framework.customer.model.CustomerInfo;
 import com.shxt.framework.customer.query.CustomerQuery;
 import com.shxt.framework.customer.service.ICustomerService;
+import com.shxt.framework.customertype.service.ICustomerTypeService;
 
 public class CustomerAction extends BaseAction {
 
@@ -25,11 +26,13 @@ public class CustomerAction extends BaseAction {
 	private Integer cus_id;
 
 	private ICustomerService customerService;
-	
-	
-
-	public void setCustomerService(ICustomerService customerService) {
+		public void setCustomerService(ICustomerService customerService) {
 		this.customerService = customerService;
+	}
+		
+	private ICustomerTypeService customerTypeService;
+	public void setCustomerTypeService(ICustomerTypeService customerTypeService) {
+		this.customerTypeService = customerTypeService;
 	}
 
 	public String find(){
@@ -46,7 +49,8 @@ public class CustomerAction extends BaseAction {
 	 * @return
 	 */
 	public String toAdd(){
-
+		
+	
 		this.toJsp="customer/add";
 		return DISPATCHER;
 	}
@@ -88,10 +92,20 @@ public class CustomerAction extends BaseAction {
 		return DISPATCHER;
 	}
 	
-	public String deleteCusInfo(){
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		this.jsonResult=map;
+	public String toUpdateStatus(){
+		System.out.println(1);
+
+		Map<String , Object> map = new HashMap<String, Object>();
+		try {
+			customerService.updateStatus(cus_id);
+			map.put("flag", "success");
+			map.put("message", "变更成功");
+		} catch (Exception e) {
+			map.put("flag", "error");
+			map.put("message", "变更失败请联系管理员");
+			e.printStackTrace();
+		}
+		this.jsonResult = map;
 		return JSON;
 	}
 
@@ -134,6 +148,7 @@ public class CustomerAction extends BaseAction {
 	public void setCus_id(Integer cusId) {
 		cus_id = cusId;
 	}
+	
 
 
 

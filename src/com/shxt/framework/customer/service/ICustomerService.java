@@ -40,6 +40,11 @@ public interface ICustomerService {
 	 * @param type_id
 	 */
 	public void delete(Integer cus_id);
+	/**
+	 * 更该客户状态
+	 * @param cus_id
+	 */
+	public void updateStatus(Integer cus_id);
 	
 	public List<CustomerInfo> list();
 	

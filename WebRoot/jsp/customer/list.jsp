@@ -107,29 +107,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return;
             }
          }
-            function toDelete(){
-            var cus_id =$("input[name='id']:checked").val();
-              if(cus_id){
-                  if(window.confirm("你确定要删除该记录吗？")){
-                      $.get("sys/deleteCusInfoCustomerAction.action",{cus_id:cus_id},function(data){
-                         if(data.flag=="success"){
-                             var radio = $("input[name='id']:checked");
-                             radio.parent().parent().hide("slow",function(){
-                                 $(this).remove();
-                             })
-                         } else{
-                             alert(data.message);
-                             return false;
-                         }
-                      });
-                      
-                  }
-            }else{
-                alert("请选择一条记录进行删除");
-                return false;
+            function toLogOff(){
+            var radio = $("input[name='id']:checked");
+            //<!--判断是不是修改的自己的-->
+            //<s:property value="#session.session_user.user_id"/>
+            
+            if(radio.val()){
+                var status = $.trim(radio.parent().parent().find("span").text());
+                if(status=="可用"){
+                    status="<font color='red'>禁用</font>"
+                }else{
+                    status="<font color='red'>可用</font>"
+                }
+            var d = top.dialog({
+                title: '提示信息',
+                content: '你是否要对该账号进行'+status+'操作码',
+                okValue: '确定',
+                ok: function () {
+                    this.title('提交中…');
+                      var params = {
+                            cus_id:radio.val()
+                        }
+                      $.post("sys/toUpdateStatusCustomerAction.action",params,function(data){
+                            if(data.flag=="success"){
+                                alert(data.message);
+
+                                if($(status).text()=="可用"){
+                                  radio.parent().parent().find("span").css("color","green");
+                                  radio.parent().parent().find("span").html($(status).text());
+                                }else{
+                                  radio.parent().parent().find("span").css("color","red");
+                                  radio.parent().parent().find("span").html($(status).text());
+                                }
+                                return;
+                            }else{
+                                alert(data.message);
+                                return;
+                            }
+                        });
+                    
+                },
+                cancelValue: '取消',
+                cancel: function () {}
+            });
+            d.show();
+            }else{// "" false null undefined 0
+                alert("请选中一条记录进行操作!");
+                return;
             }
-                  
-         }
+        }
        
         
         function toAllocationRole(){
@@ -198,7 +224,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul class="seachform1">
                 <li style="cursor: pointer;" onclick="toAddDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>新建</li>
                 <li style="cursor: pointer;" onclick="toUpdateDialog()"><span><img src="<%=path %>/resource/admin/images/t02.png" /></span>编辑</li>
-                <li style="cursor: pointer;" onclick="toDelete()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>删除</li>
+                <li style="cursor: pointer;" onclick="toLogOff()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>变更</li>
                 <li style="cursor: pointer;" onclick="toAllocationRole()"><span><img src="<%=path %>/resource/admin/images/t05.png" /></span>分配角色</li>
             </ul>
             
@@ -217,14 +243,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <th>工作单位</th>
                     <th>身份证号</th>
                     <th>客户的类型</th>
-                    <th>生日</th> 
                     <th>驾驶证号码</th> 
-                    <th>担保人姓名</th> 
-                    <th>担保人性别</th> 
-                    <th>担保人身份证号码</th> 
-                    <th>担保人家庭地址</th> 
-                    <th>担保人工作单位</th> 
-                    <th>担保人与客户关系</th>
+                    <th>状态</th> 
+                    <th>担保人信息</th> 
+                    
                 </tr>
             </thead>
         <tbody>
@@ -238,15 +260,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td><s:property value="#cus.cus_address"/></td>
                     <td><s:property value="#cus.cus_work_address"/></td>
                     <td><s:property value="#cus.cus_id_card"/></td>
-                    <td><s:property value="#cus.gua_name"/></td>
-                    <td><s:property value="#cus.gua_sex"/></td>
-                    <td><s:property value="#cus.gua_tel"/></td>
-                    <td><s:property value="#cus.gua_id_card"/></td>
-                    <td><s:property value="#cus.gua_address"/></td>
-                    <td><s:property value="#cus.gua_work_address"/></td>
-                    <td><s:property value="#cus.relation"/></td>
                     <td><s:property value="#cus.customer_type"/></td>
-                    <td><s:property value="#cus.verify"/></td>
+                    <td><s:property value="#cus.cus_driver_code"/></td>
+                    <td>
+                         <s:if test="#cus.cus_status==1">
+                              <span style="color:green;font-weight:blod;">可用</span>
+                          </s:if>
+                          <s:else>
+                               <span style="color:red;font-weight:blod;">禁用</span>
+                          </s:else>
+                    </td>
+                    <td><a href="javascript:void(0)" onclick="toguaInfoDialog()"><font color="blue">担保人信息</font></a></td>
                 </tr> 
             </s:iterator>
            
