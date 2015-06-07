@@ -30,26 +30,54 @@ public class CustomerServiceImpl implements ICustomerService {
 		return this.baseDao.find(hql, pageBean);
 	}
 	
-	public void add(CarInfo carInfo) {
-		// TODO Auto-generated method stub
+	public void add(CustomerInfo cusInfo) {
+		this.baseDao.add(cusInfo);
+		
 		
 	}
 	
 
-	public void delete(Integer typeId) {
-		// TODO Auto-generated method stub
+	public void delete(Integer cus_id) {
+		
+		
 		
 	}
 
 
-	public void update(CarInfo carInfo) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 	public List<CustomerInfo> list() {
 		return null;
+		
+	}
+
+
+	public CustomerInfo toUpdate(Integer cusId) {
+		
+		return (CustomerInfo) this.baseDao.load(CustomerInfo.class, cusId);
+	}
+
+
+	public void update(CustomerInfo cusInfo) {
+		System.out.println(cusInfo.getCus_id());
+		CustomerInfo oldCusInfo = (CustomerInfo) this.baseDao.load(CustomerInfo.class, cusInfo.getCus_id());
+		
+		oldCusInfo.setCus_address(cusInfo.getCus_address());
+		oldCusInfo.setCus_driver_code(cusInfo.getCus_driver_code());
+		oldCusInfo.setCus_id_card(cusInfo.getCus_id_card());
+		oldCusInfo.setCus_name(cusInfo.getCus_name());
+		oldCusInfo.setCus_sex(cusInfo.getCus_sex());
+		oldCusInfo.setCus_tel(cusInfo.getCus_tel());
+		oldCusInfo.setCus_work_address(cusInfo.getCus_work_address());
+		oldCusInfo.setGua_address(cusInfo.getGua_address());
+		oldCusInfo.setGua_id_card(cusInfo.getGua_id_card());
+		oldCusInfo.setGua_name(cusInfo.getGua_name());
+		oldCusInfo.setGua_sex(cusInfo.getGua_sex());
+		oldCusInfo.setGua_tel(cusInfo.getGua_tel());
+		oldCusInfo.setGua_work_address(cusInfo.getGua_work_address());
+		
+		this.baseDao.update(oldCusInfo);
 		
 	}
 

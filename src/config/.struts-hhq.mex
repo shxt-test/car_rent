@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
-  <package name="system-default" location="0,0" size="0,0">
+  <package name="hhq" location="0,0" size="0,0">
     <action name="*CustomerAction" location="0,0" size="0,0">
       <result name="dispatcher">
         <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
+      </result>
+      <result name="redirect">
+        <resourceEdge source="redirect" routing="0" target="${toJsp}.jsp" />
       </result>
     </action>
   </package>

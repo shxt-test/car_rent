@@ -66,8 +66,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var d = top.dialog({
                 width:700,
                 height:700,
-                title: '新建用户',
-                url:'sys/toAddUserAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                title: '新建客户',
+                url:'sys/toAddCustomerAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
                 onclose: function () {
                 if (this.returnValue=="success") {
                    // alert(this.returnValue);
@@ -84,14 +84,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          * */
          function toUpdateDialog(){
             //判断改用户选择
-            var user_id = $("input[name='id']:checked").val();
-            if(user_id){
+            var cus_id = $("input[name='id']:checked").val();
+            if(cus_id){
                 //成功需要注意jquery的版本必须是1.7+以上
                 var d = top.dialog({
                     width:700,
-                    height:700,
-                    title: '新建用户',
-                    url:'sys/toUpdateUserAction.action?user_id='+user_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                    height:600,
+                    title: '更改客户',
+                    url:'sys/toUpdateCustomerAction.action?cus_id='+cus_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
                     onclose: function () {
                     if (this.returnValue=="success") {
                        // alert(this.returnValue);
@@ -107,59 +107,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return;
             }
          }
-        
-        function toLogOff(){
-            var radio = $("input[name='id']:checked");
-            //<!--判断是不是修改的自己的-->
-            //<s:property value="#session.session_user.user_id"/>
-            if(radio.val()==${session_user.user_id}){
-                alert('不能对自己进行修改');
+            function toDelete(){
+            var cus_id =$("input[name='id']:checked").val();
+              if(cus_id){
+                  if(window.confirm("你确定要删除该记录吗？")){
+                      $.get("sys/deleteCusInfoCustomerAction.action",{cus_id:cus_id},function(data){
+                         if(data.flag=="success"){
+                             var radio = $("input[name='id']:checked");
+                             radio.parent().parent().hide("slow",function(){
+                                 $(this).remove();
+                             })
+                         } else{
+                             alert(data.message);
+                             return false;
+                         }
+                      });
+                      
+                  }
+            }else{
+                alert("请选择一条记录进行删除");
                 return false;
             }
-            if(radio.val()){
-                var status = $.trim(radio.parent().parent().find("span").text());
-                if(status=="可用"){
-                    status="<font color='red'>禁用</font>"
-                }else{
-                    status="<font color='red'>可用</font>"
-                }
-            var d = top.dialog({
-                title: '提示信息',
-                content: '你是否要对该账号进行'+status+'操作码',
-                okValue: '确定',
-                ok: function () {
-                    this.title('提交中…');
-                      var params = {
-                            user_id:radio.val()
-                        }
-                      $.post("sys/toUpdateStatusUserAction.action",params,function(data){
-                            if(data.flag=="success"){
-                                alert(data.message);
-
-                                if($(status).text()=="可用"){
-                                  radio.parent().parent().find("span").css("color","green");
-                                  radio.parent().parent().find("span").html($(status).text());
-                                }else{
-                                  radio.parent().parent().find("span").css("color","red");
-                                  radio.parent().parent().find("span").html($(status).text());
-                                }
-                                return;
-                            }else{
-                                alert(data.message);
-                                return;
-                            }
-                        });
-                    
-                },
-                cancelValue: '取消',
-                cancel: function () {}
-            });
-            d.show();
-            }else{// "" false null undefined 0
-                alert("请选中一条记录进行操作!");
-                return;
-            }
-        }
+                  
+         }
+       
         
         function toAllocationRole(){
               //判断该用户选择
@@ -227,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <ul class="seachform1">
                 <li style="cursor: pointer;" onclick="toAddDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>新建</li>
                 <li style="cursor: pointer;" onclick="toUpdateDialog()"><span><img src="<%=path %>/resource/admin/images/t02.png" /></span>编辑</li>
-                <li style="cursor: pointer;" onclick="toLogOff()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>变更</li>
+                <li style="cursor: pointer;" onclick="toDelete()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>删除</li>
                 <li style="cursor: pointer;" onclick="toAllocationRole()"><span><img src="<%=path %>/resource/admin/images/t05.png" /></span>分配角色</li>
             </ul>
             
@@ -236,15 +207,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <table class="tablelist">
             <thead>
-                <tr>
+                <tr >
                     <th></th>
-                    <th>编号</th>
+                    <th >编号</th>
                     <th>姓名</th>
                     <th>性别</th>
                     <th>联系方式</th>
                     <th>家庭住址</th>
                     <th>工作单位</th>
                     <th>身份证号</th>
+                    <th>客户的类型</th>
                     <th>生日</th> 
                     <th>驾驶证号码</th> 
                     <th>担保人姓名</th> 
@@ -253,14 +225,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <th>担保人家庭地址</th> 
                     <th>担保人工作单位</th> 
                     <th>担保人与客户关系</th>
-                    <th>客户的类型</th>
                 </tr>
             </thead>
         <tbody>
             <s:iterator value="pageBean.datas" var="cus" status="st">
                 <tr>
                     <td><input name="id" type="radio" value="<s:property value="#cus.cus_id"/>" /></td>
-                    <td><s:property value="#st.count"/></td>
+                    <td height="60px" align="center"><s:property value="#st.count"/></td>
                     <td><s:property value="#cus.cus_name"/></td>
                     <td><s:property value="#cus.cus_sex"/></td>
                     <td><s:property value="#cus.cus_tel"/></td>
