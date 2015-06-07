@@ -84,7 +84,10 @@ public class UserAction extends BaseAction {
 
 		return DISPATCHER;
 	}
-
+	/***
+	 * 用户添加操作，有头像的上传哟
+	 * @return
+	 */
 	public String add(){
 		try {
 			if(photo!=null){
@@ -104,7 +107,7 @@ public class UserAction extends BaseAction {
 				user.setRole(null);
 			}
 			//默认密码
-			user.setPassword("123456");
+			user.setPassword(PropertiesConfigHelper.getStringValue("DEFAULT_PASSWORD"));
 			//添加创建者名字
 			Map<String ,Object> session = ActionContext.getContext().getSession();
 			User loginUser  = (User) session.get(PropertiesConfigHelper.getStringValue("RBAC_SESSION"));
