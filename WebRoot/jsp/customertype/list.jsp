@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -94,14 +96,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <ul class="imglist">
 
-        <li class="selected">
-            <span><img src="<%=path%>/resource/admin/images/img01.png"/></span>
+         <c:forEach  items="${typeList}"  var="type"  >
+          <li class="selected" title="">
+            <span><img alt="图片未加载" src="<%=path%>/upload/customertype/<c:out value="${type.photo}" default="default.png"></c:out> "/></span>
+           
+            <h2><c:out value="${type.c_type_name}"></c:out></h2>
+              
+            <p><a href="javascript:void(0)" onclick="toUpdateDialog('${type.c_type_id}')">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="toChangeStatus()">变更</a></p>
 
-            <h2><a href="#">软件界面设计下载</a></h2>
-
-            <p><a href="#">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="toChangeStatus()">变更</a></p>
-
-            <p><a href="#">注销</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">授权</a></p>
+            <p><a href="javascript:void(0)" onclick="toDelete(this,'${type.c_type_id}')">注销</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="toAuthorize('${type.c_type_id}')">授权</a></p>
+        </c:forEach>
+          
         </li>
 
     </ul>

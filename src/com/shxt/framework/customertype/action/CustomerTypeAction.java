@@ -8,9 +8,9 @@ import com.shxt.framework.customertype.model.CustomerType;
 import com.shxt.framework.customertype.service.ICustomerTypeService;
 
 public class CustomerTypeAction extends BaseAction{
-	
+	/**ID*/
 	private Integer c_type_id;
-	
+	/**名称*/
 	private String c_type_name;
 	
 	private List<CustomerType> typeList;
@@ -28,7 +28,7 @@ public class CustomerTypeAction extends BaseAction{
 	public String list(){
 		try {
 			System.out.println("123");
-			this.customerTypeService.list();
+			typeList = this.customerTypeService.list();
 			this.toJsp = "customertype/list";
 		} catch (Exception e) {
 			e.printStackTrace();
