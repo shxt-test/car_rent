@@ -91,8 +91,8 @@
                 <comment>是否审核 1代表未审核 2代表审核完毕</comment>
             </column>
         </property>
-        <many-to-one name="customer_type" class="com.shxt.framework.customertype.model.CustomerType">
-            <column name="fk_custype_id"></column>
+        <many-to-one name="customer_type" class="com.shxt.framework.customertype.model.CustomerType" 
+         column="fk_custype_id" lazy="false">
         </many-to-one>
     </class>
 </hibernate-mapping>

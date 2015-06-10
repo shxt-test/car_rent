@@ -19,6 +19,7 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 	}
 
 	public void delete(Integer typeId) {
+
 		// TODO Auto-generated method stub
 
 	}
@@ -26,6 +27,7 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 	public List<CustomerType> list() {
 		String sql = "select * from car_customer_type";
 		return (List<CustomerType>) this.baseDao.listSQL(sql, CustomerType.class, false);
+
 	}
 
 	public void update(CustomerType customerType) {
