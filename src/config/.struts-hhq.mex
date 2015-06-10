@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<Struts2Diagram version="2.0" />
-=======
 <Struts2Diagram version="2.0">
-  <package name="wsj" location="0,0" size="0,0">
-    <action name="*CustomerTypeAction" location="0,0" size="0,0">
+  <package name="hhq" location="0,0" size="0,0">
+    <action name="*CustomerAction" location="0,0" size="0,0">
       <result name="dispatcher">
         <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
       </result>
@@ -16,5 +13,4 @@
   </package>
   <webResource name="${toJsp}.jsp" path="/jsp/${toJsp}.jsp" location="0,0" size="0,0" />
 </Struts2Diagram>
->>>>>>> refs/remotes/origin/master
 

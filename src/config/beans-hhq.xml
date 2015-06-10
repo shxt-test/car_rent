@@ -15,4 +15,15 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
       
         
+      <!-- 配置baseDao -->
+      <bean id="customerServiceImpl" class="com.shxt.framework.customer.service.CustomerServiceImpl" scope="prototype">
+        <property name="baseDao" ref="baseDaoImpl"></property>
+      </bean>
+      <!-- 配置客户信息 -->
+        <bean id="customerAction" class="com.shxt.framework.customer.action.CustomerAction" scope="prototype">
+            <property name="customerService" ref="customerServiceImpl"></property>
+            <property name="customerTypeService" ref="customerTypeServiceImpl"></property>
+        </bean>
+        
+
 </beans>

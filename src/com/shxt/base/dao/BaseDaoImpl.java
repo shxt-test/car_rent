@@ -116,9 +116,9 @@ public class BaseDaoImpl implements IBaseDao {
 			}
 		}
 		query.setFirstResult((pageBean.getPageNow()-1)*pageBean.getPageSize()).setMaxResults(pageBean.getPageSize());
-
 		//存结果集的记录
 		pageBean.setDatas(query.list());
+		
 		//获取总记录数 
 		String count_hql = this.getCountHQL(hql);
 		Query count_query = getSession().createQuery(count_hql);
