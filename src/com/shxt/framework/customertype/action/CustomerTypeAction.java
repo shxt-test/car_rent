@@ -25,6 +25,13 @@ public class CustomerTypeAction extends BaseAction{
 	
 	private ICustomerTypeService customerTypeService;
 	
+	public String toAdd(){
+		
+		this.toJsp = "customertype/add";
+		
+		return REDIRECT;
+	}
+	
 	public String list(){
 		try {
 			System.out.println("123");

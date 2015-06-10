@@ -37,7 +37,6 @@ public class BaseAction extends ActionSupport {
 	 */
 	protected Object jsonResult;
 	
-	
 
 	public String getToJsp() {
 		return toJsp;

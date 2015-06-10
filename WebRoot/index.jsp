@@ -8,21 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-<<<<<<< HEAD
     <title>汽车租赁管理系统</title>
-=======
-<<<<<<< HEAD
-    <title>汽车租赁管理系统</title>
-=======
-<<<<<<< HEAD
-
-    <title>汽车租赁管理系统</title>
-
-=======
-    <title>汽车租赁管理系统</title>
->>>>>>> refs/remotes/origin/wsj
->>>>>>> refs/remotes/origin/master
->>>>>>> branch 'master' of https://github.com/shxt-test/car_rent.git
   </head>
   <body>
        <%
