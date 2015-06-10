@@ -12,7 +12,7 @@ public class CustomerTypeAction extends BaseAction{
 	private Integer c_type_id;
 	/**名称*/
 	private String c_type_name;
-	
+	/**列表*/
 	private List<CustomerType> typeList;
 	
 	private CustomerType customerType; 
