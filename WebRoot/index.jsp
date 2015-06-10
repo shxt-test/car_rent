@@ -8,12 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>汽车租赁管理系统**********************</title>
+    <title>汽车租赁管理系统</title>
   </head>
   <body>
        <%
         request.getRequestDispatcher("/jsp/login.jsp").forward(request,response); 
         %>
-        gyytYYGTgt6
   </body>
 </html>
