@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 width:700,
                 height:500,
                 title: '欢迎',
-                url:'shxt/add.html',//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                url:'sys/toAddCustomerTypeAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
                 onclose: function () {
                 if (this.returnValue) {
                     alert(this.returnValue);
