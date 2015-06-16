@@ -14,7 +14,7 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 	}
 
 	public void add(CustomerType customerType) {
-		// TODO Auto-generated method stub
+		this.baseDao.add(customerType);
 
 	}
 
@@ -33,5 +33,5 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 		// TODO Auto-generated method stub
 
 	}
-
+		
 }
