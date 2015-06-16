@@ -8,7 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+
     <title>汽车租赁管理系统*****123123</title>
+
   </head>
   <body>
        <%
