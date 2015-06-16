@@ -13,6 +13,14 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
+        <!-- 汽车类型管理 开始 -->
+      <bean id="carTypeServiceImpl" class="com.shxt.framework.cartype.service.CarTypeServiceImpl">
+            <property name="baseDao" ref="baseDaoImpl"></property>
+      </bean>
+      <bean id="carTypeAction" class="com.shxt.framework.cartype.action.CarTypeAction">
+            <property name="carTypeService" ref="carTypeServiceImpl"></property>
+      </bean>
       
+      <!-- 汽车类型管理 结束 -->
         
 </beans>
