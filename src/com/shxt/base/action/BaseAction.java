@@ -1,5 +1,14 @@
 package com.shxt.base.action;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BaseAction extends ActionSupport {
@@ -35,8 +44,35 @@ public class BaseAction extends ActionSupport {
 	 * 用于传递JSON的数据格式
 	 * @return
 	 */
+	protected File photo;
+	
+	protected String photoFileName;
+	
+	protected String photoCountentType;
+	
+	protected String saveName;
+	
 	protected Object jsonResult;
 	
+	public String getSaveName(){
+		try {
+			if(photo!=null){
+				String path = ServletActionContext.getServletContext().getRealPath("/upload/customertype");
+
+				String ext = FilenameUtils.getExtension(photoFileName);
+				saveName = (new Date()).getTime()+"_"+(new Random()).nextInt(10000)+"."+ext;
+
+				File newFile = new File(path+"/"+saveName);
+				newFile.createNewFile();
+
+				FileUtils.copyFile(photo, newFile);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return saveName;
+	}
 
 	public String getToJsp() {
 		return toJsp;
@@ -76,6 +112,34 @@ public class BaseAction extends ActionSupport {
 
 	public void setJsonResult(Object jsonResult) {
 		this.jsonResult = jsonResult;
+	}
+
+	public File getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(File photo) {
+		this.photo = photo;
+	}
+
+	public String getPhotoFileName() {
+		return photoFileName;
+	}
+
+	public void setPhotoFileName(String photoFileName) {
+		this.photoFileName = photoFileName;
+	}
+
+	public String getPhotoCountentType() {
+		return photoCountentType;
+	}
+
+	public void setPhotoCountentType(String photoCountentType) {
+		this.photoCountentType = photoCountentType;
+	}
+
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
 	}
 	
 
