@@ -25,11 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			$("#menu_name").focus();
         			return false;
         		}
-        		
         	});
-           
         }
-
     </script>
 </head>
 
