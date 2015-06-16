@@ -67,12 +67,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             return true;
         }
          
-       $(function(){
-    	   
-    	   
-       })
-       
-     
 	/*
 	用途：检查输入手机号码是否正确
 	输入：
