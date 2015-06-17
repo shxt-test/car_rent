@@ -41,15 +41,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 title: '欢迎',
                 url:'sys/toAddCustomerTypeAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
                 onclose: function () {
-                if (this.returnValue) {
-                    alert(this.returnValue);
+                if (this.returnValue=="success") {
+                    window.location.reload();
                 }
 
             }
             });
             d.showModal();
         }
+         function toUpdateCustomerTypeDialog(c_type_id){
+            //测试artDialog是否成功
+            //成功需要注意jquery的版本必须是1.7+以上
+            var d = top.dialog({
+                id:"rightFrame",
+                width:700,
+                height:500,
+                title: '欢迎',
+                url:'sys/toUpdateCustomerTypeAction.action?c_type_id='+c_type_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                onclose: function () {
+                if (this.returnValue=="success") {
+                    window.location.reload();
+                }
 
+            }
+            });
+            d.showModal();
+        }
 
         //变更状态方法
         function toChangeStatus(){
@@ -67,7 +84,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             d.show();
         }
 
-
+        function deleteDialog(c_type_id){
+        	 var d = top.dialog({
+                id:"rightFrame",
+                width:700,
+                height:500,
+                title: '欢迎',
+                url:'sys/deleteCustomerTypeAction.action?c_type_id='+c_type_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                onclose: function () {
+                if (this.returnValue=="success") {
+                    window.location.reload();
+                }
+            }
+            });
+            d.showModal();
+        }
 
     </script>
 
@@ -102,9 +133,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            
             <h2><c:out value="${type.c_type_name}"></c:out></h2>
               
-            <p><a href="javascript:void(0)" onclick="toUpdateDialog('${type.c_type_id}')">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="toChangeStatus()">变更</a></p>
-
-            <p><a href="javascript:void(0)" onclick="toDelete(this,'${type.c_type_id}')">注销</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" onclick="toAuthorize('${type.c_type_id}')">授权</a></p>
+            <p><a href="javascript:void(0)" onclick="toUpdateCustomerTypeDialog('${type.c_type_id}')">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href="javascript:void(0)" onclick="deleteDialog('${type.c_type_id}')">删除</a></p>
+            <p><a href="javascript:void(0)" onclick="toDelete(this,'${type.c_type_id}')">注销</a>&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href="javascript:void(0)" onclick="toAuthorize('${type.c_type_id}')">授权</a></p>
         </c:forEach>
           
 
