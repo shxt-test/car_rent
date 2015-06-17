@@ -17,7 +17,6 @@
       <!-- 客户类型管理 开始 -->
       <bean id="customerTypeServiceImpl" class="com.shxt.framework.customertype.service.CustomerTypeServiceImpl">
             <property name="baseDao" ref="baseDaoImpl"></property>
-      
       </bean>
       
       <bean id="customerTypeAction" class="com.shxt.framework.customertype.action.CustomerTypeAction">
