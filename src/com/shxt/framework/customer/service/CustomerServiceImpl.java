@@ -15,8 +15,6 @@ public class CustomerServiceImpl implements ICustomerService {
 	public void setBaseDao(IBaseDao baseDao) {
 		this.baseDao = baseDao;
 	}
-
-
 	public PageBean find(CustomerQuery query, PageBean pageBean) {
 		String hql = "from CustomerInfo cus where 1=1 ";
 		if(query!=null){
@@ -26,8 +24,16 @@ public class CustomerServiceImpl implements ICustomerService {
 			if(query.getCus_id_card()!=null&&query.getCus_id_card().trim().length()>0){
 				hql += " and cus.cus_id_card='"+query.getCus_id_card()+"' ";
 			}
+			
+			if(query.getCus_sex()!=null&&query.getCus_sex().length()>0){
+				hql += " and cus.cus_sex='"+query.getCus_sex()+"'";
+			}
+			
+			if(query.getCustomer_type()!=null&&query.getCustomer_type().length()>0){
+				hql += " and cus.customer_type='"+query.getCustomer_type()+"'";
+			}
 		}
-		hql +=" order by cus.cus_id desc ";
+		hql +=" order by cus.cus_status asc ";
 		return this.baseDao.find(hql, pageBean);
 	}
 	

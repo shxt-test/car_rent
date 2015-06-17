@@ -41,9 +41,9 @@
 	<property name="hibernate.hbm2ddl.auto">update</property>
 
 	<!-- 配置结束 -->
-	<!--<mapping resource="com/shxt/framework/user/model/User.hbm.xml" />
+	<!-- <mapping resource="com/shxt/framework/user/model/User.hbm.xml" />
 	<mapping resource="com/shxt/framework/role/model/Role.hbm.xml" />
-	<mapping resource="com/shxt/framework/menu/model/Menu.hbm.xml" />-->
+	<mapping resource="com/shxt/framework/menu/model/Menu.hbm.xml" /> -->
 
         <mapping resource="com/shxt/framework/carinfo/model/CarInfo.hbm.xml" />
         <mapping resource="com/shxt/framework/cartype/model/CarType.hbm.xml" />

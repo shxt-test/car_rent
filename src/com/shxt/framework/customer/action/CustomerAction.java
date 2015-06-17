@@ -41,6 +41,7 @@ public class CustomerAction extends BaseAction {
 		if(pageBean==null){
 			pageBean = new PageBean();
 		}
+		cusTypeList = customerTypeService.list();
 		this.pageBean = customerService.find(query, pageBean);
 		this.toJsp="customer/list";
 		return DISPATCHER;
