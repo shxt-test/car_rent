@@ -89,13 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         
       //修改类型 
-       function toUpdateTypeDialog(){
-            if(!$("input[name='id']:checked").val()){
-                alert("请选中一条记录进行操作")
-                return false;
-            }else{
-                var CarType_id = $("input[name='id']:checked").val();
-                alert(CarType_id);
+       function toUpdateTypeDialog(CarType_id){
              //成功需要注意jquery的版本必须是1.7+以上
                     var d = top.dialog({
                         id:"rightFrame",
@@ -111,7 +105,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                     });
                     d.showModal();
-            }
         }
     //删除品牌
        function toDelete(){
@@ -131,7 +124,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          }
        
         function toChildShowWin(obj,CarType_id){
-        
         	var content = '<a href="javascript:void(0)" onclick="toUpdateTypeDialog(\''+CarType_id+'\')"><font color="blue" >编辑</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
                             +'<a href="javascript:void(0)" onclick="deleteChildDialog(\''+CarType_id+'\')"><font color="blue" >删除</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
                             +'<a href="javascript:void(0)" onclick="toLookTypeDialog(\''+CarType_id+'\')"><font color="blue" >查看</font></a>'
@@ -209,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <li class="click" onclick="toAddDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>添加品牌</li>
         <li class="click" onclick="toUpdateDialog()"><span><img src="<%=path %>/resource/admin/images/t02.png" /></span>修改</li>
         <li class="click" onclick="deleteParentDialog()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>删除</li>
-        <li><span><img src="<%=path %>/resource/admin/images/t04.png" /></span>统计</li>
+        <li class="click" onclick="tjDialog()"><span><img src="<%=path %>/resource/admin/images/t04.png" /></span>统计</li>
         </ul>
         <ul class="toolbar1">
        <a href="javascript:void(0)"> <li   onclick="toAddChildDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>添加类型</li></a>
@@ -234,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td><input name="id"  type="radio" value="${parent.type_id}" /></td>
         <td>${vs.count}</td>
         <td>${parent.type_name}</td>
-        <td><img alt="" src="<%=path %>/resource/CarType/${parent.icon}"></td>
+        <td><img alt="" src="<%=path %>/resource/menu/${parent.icon}"></td>
         <td>
             <c:forEach items="${parent.carTypeList}" var="child" varStatus="vs">
                 <a href="javascript:void(0)" id="child_${child.type_id}" onclick="toChildShowWin(this,${child.type_id})">${vs.count}.&nbsp;${child.type_name}</a>&nbsp;&nbsp;

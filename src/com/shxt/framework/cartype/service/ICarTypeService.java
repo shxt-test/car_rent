@@ -22,6 +22,14 @@ public interface ICarTypeService {
 	public List<CarType> getParentNodeByCarTypeId(); 
 	
 	/**
+	 * 得到启用的列表
+	 * @return
+	 */
+	
+	public List<CarType> getEnableList(); 
+
+	
+	/**
 	 * 获取该品牌下的所有类型
 	 * @param typeId
 	 * @return
