@@ -75,8 +75,6 @@ public class Role implements Serializable {
 		return menuSet;
 	}
 
-
-
 	public void setMenuSet(Set<Menu> menuSet) {
 		this.menuSet = menuSet;
 	}

@@ -28,7 +28,7 @@ public class CarInfo implements Serializable {
 	private String km;
 	/**登记人的姓名*/
 	private String create_user_name;
-	/**车辆状态1:可租 2:预定 3:维修 4:报废 5:租赁*/
+	/**车辆状态1:可租 2:预定 3:报废  4:租赁*/
 	private String car_status = "1";
 	/**预定日期*/
 	private Date reserve_date;
