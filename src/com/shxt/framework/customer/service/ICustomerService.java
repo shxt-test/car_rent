@@ -45,6 +45,11 @@ public interface ICustomerService {
 	 * @param cus_id
 	 */
 	public void updateStatus(Integer cus_id);
+	/**
+	 * 验证省份证号码
+	 * @param id_card
+	 */
+	public Long getTest(String id_card);
 	
 	public List<CustomerInfo> list();
 	

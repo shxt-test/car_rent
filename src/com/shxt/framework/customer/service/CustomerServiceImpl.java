@@ -101,6 +101,11 @@ public class CustomerServiceImpl implements ICustomerService {
 		this.baseDao.update(cusInfo);
 		
 	}
+	public Long getTest(String idCard) {
+	
+		String hql = "select count(cus.cus_id) from CustomerInfo cus where cus.cus_id_card=?";
+		return (Long) this.baseDao.query(hql, idCard);
+	}
 
 
 

@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	})
         }
         
-        //加载所有省份
+        //加载所有城市
         function toLoadCity(){
             
            var pro_id = $("#province").val();

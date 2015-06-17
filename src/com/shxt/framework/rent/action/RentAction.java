@@ -15,7 +15,7 @@ public class RentAction extends BaseAction {
 	
 	
 	public String find(){
-		this.toJsp="rentInfo/list";
+		this.toJsp="rent/returnCar";
 		return DISPATCHER;
 	}
 
