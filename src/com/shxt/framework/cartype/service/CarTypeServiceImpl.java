@@ -18,18 +18,12 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		return null;
 	}
 	
-	/**
-	 * 获取所有的品牌信息
-	 */
+
 	public List<CarType> getParentNodeByCarTypeId() {
 		String sql = "select mm.* from car_type mm ";
 		return (List<CarType>) this.baseDao.listSQL(sql, null, CarType.class, true);
 	}
-	/**
-	 * 获取品牌下的所有车类型
-	 * @param typeId
-	 * @return
-	 */
+
 	public List<CarType> getChildNodeByCarTypeId(Integer typeId) {
 		String sql = "select mm.* from car_type mm where mm.parent_id =?";
 		return (List<CarType>) this.baseDao.listSQL(sql, typeId, CarType.class, true);
@@ -64,15 +58,12 @@ public class CarTypeServiceImpl implements ICarTypeService {
 	
 	//添加品牌
 	public void addBrand(CarType carType){
-		System.out.println("12321");
 		String hql="select count(m.type_id) from CarType m where m.type_name =? and m.parent_id is null";
 		Long  count=(Long) this.baseDao.query(hql, carType.getType_name().trim());
-		System.out.println(count+"12");
 		if(count>0){
 			throw new RbacException("该品牌已经存在，请重新添加");
 		}else{
 			this.baseDao.add(carType);
-
 		}
 	}
 	/**
@@ -127,7 +118,7 @@ public class CarTypeServiceImpl implements ICarTypeService {
 			String hql = "select count(type_id) from CarType where type_name=? and parent_id is not null";
 			Long count = (Long) this.baseDao.query(hql,carType.getType_name());
 			if(count>0){
-				throw new RbacException("该菜单已经拥有，请重新填写");
+				throw new RbacException("该类型已经拥有，请重新填写");
 			}else{
 				this.baseDao.add(carType);
 			}
@@ -136,5 +127,10 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		public Long getCheckCarTypeName(String typeName) {
 			String hql="select count(r.type_id) from CarType r where r.type_name =?";
 			return (Long) this.baseDao.query(hql,typeName.trim());
+		}
+
+		public List<CarType> getEnableList() {
+			String sql = "select mm.* from car_type mm where mm.type_status=1";
+			return (List<CarType>) this.baseDao.listSQL(sql, null, CarType.class, true);
 		}
 }
