@@ -24,7 +24,7 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 
 	public List<CustomerType> list() {
 		
-		String sql = "select * from car_customer_type";
+		String sql = "select * from customer_type";
 		return (List<CustomerType>) this.baseDao.listSQL(sql, CustomerType.class, false);
 
 	}

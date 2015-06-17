@@ -61,9 +61,8 @@ public class CustomerServiceImpl implements ICustomerService {
 
 
 	public void update(CustomerInfo cusInfo) {
-		System.out.println(cusInfo.getCus_id());
-		CustomerInfo oldCusInfo = (CustomerInfo) this.baseDao.load(CustomerInfo.class, cusInfo.getCus_id());
 		
+		CustomerInfo oldCusInfo = (CustomerInfo) this.baseDao.load(CustomerInfo.class, cusInfo.getCus_id());
 		oldCusInfo.setCus_address(cusInfo.getCus_address());
 		oldCusInfo.setCus_driver_code(cusInfo.getCus_driver_code());
 		oldCusInfo.setCus_id_card(cusInfo.getCus_id_card());
@@ -77,6 +76,7 @@ public class CustomerServiceImpl implements ICustomerService {
 		oldCusInfo.setGua_sex(cusInfo.getGua_sex());
 		oldCusInfo.setGua_tel(cusInfo.getGua_tel());
 		oldCusInfo.setGua_work_address(cusInfo.getGua_work_address());
+		oldCusInfo.setCustomer_type(cusInfo.getCustomer_type());
 		
 		this.baseDao.update(oldCusInfo);
 		
