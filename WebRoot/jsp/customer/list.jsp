@@ -156,16 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return;
             }
         }
-       function toguaInfoDialog(){
-    	   
-	    	 var d =top.dialog({
-	    		width:300,
-	            height:200,
-	            title: '欢迎',
-	            content: '欢迎'
-	            });
-	        d.show();
-	       }
+     
         
         function toAllocationRole(){
               //判断该用户选择
@@ -191,12 +182,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 return;
             }
         }
+        
+            function toguaInfoDialog(cus_id){
+            //判断改用户选择
+         
+                //成功需要注意jquery的版本必须是1.7+以上
+                var d = top.dialog({
+                    width:700,
+                    height:210,
+                    title: '担保人信息',
+                    url:'sys/toLookCustomerAction.action?cus_id='+cus_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
+	                ok: function () {},
+					});
+                d.showModal();
+         }
     </script>
 
 </head>
 
 <body>
-
         <div class="place">
             <span>位置：</span>
             <ul class="placeul">
@@ -234,7 +238,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li style="cursor: pointer;" onclick="toAddDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>新建</li>
                 <li style="cursor: pointer;" onclick="toUpdateDialog()"><span><img src="<%=path %>/resource/admin/images/t02.png" /></span>编辑</li>
                 <li style="cursor: pointer;" onclick="toLogOff()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>变更</li>
-                <li style="cursor: pointer;" onclick="toAllocationRole()"><span><img src="<%=path %>/resource/admin/images/t05.png" /></span>分配角色</li>
             </ul>
             
        </div>
@@ -279,7 +282,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                <span style="color:red;font-weight:blod;">禁用</span>
                           </s:else>
                     </td>
-                    <td><a href="javascript:void(0)" onclick="toguaInfoDialog()"><font color="blue">担保人信息</font></a></td>
+                    <td><a href="javascript:void(0)" onclick="toguaInfoDialog(${cus_id})"><font color="blue">担保人信息</font></a></td>
                 </tr> 
             </s:iterator>
            

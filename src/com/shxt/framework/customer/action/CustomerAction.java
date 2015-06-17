@@ -129,6 +129,17 @@ public class CustomerAction extends BaseAction {
 		this.jsonResult = map;
 		return JSON;
 	}
+	/**
+	 * 查看担保人信息
+	 * @return
+	 */
+	public String toLook(){
+		cusTypeList = customerTypeService.list();
+		cusInfo = customerService.toUpdate(cus_id);
+		this.toJsp="customer/lookGua";
+		return DISPATCHER;
+		
+	}
 
 	public PageBean getPageBean() {
 		return pageBean;

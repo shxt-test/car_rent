@@ -23,6 +23,8 @@
             <property name="customerService" ref="customerServiceImpl"></property>
             <property name="customerTypeService" ref="customerTypeServiceImpl"></property>
         </bean>
+        <bean id="rentAction" class="com.shxt.framework.rent.action.RentAction" scope="prototype">
         
+        </bean>
 
 </beans>

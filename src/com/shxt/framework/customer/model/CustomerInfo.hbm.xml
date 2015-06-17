@@ -12,7 +12,7 @@
         </id>
         
         <property name="cus_name" type="string">
-            <column name="cus_name" length="32" unique="true">
+            <column name="cus_name" length="32" >
                 <comment>客户名称</comment>
             </column>
         </property>
@@ -42,7 +42,7 @@
             </column>
         </property>
         <property name="cus_driver_code" type="string">
-            <column name="cus_driver_code" length="32" unique="true">
+            <column name="cus_driver_code" length="32" >
                 <comment>客户驾驶证号码</comment>
             </column>
         </property>
@@ -62,7 +62,7 @@
             </column>
         </property>
         <property name="gua_tel" type="string">
-            <column name="gua_tel" length="20" unique="true">
+            <column name="gua_tel" length="20" >
                 <comment>担保人联系电话</comment>
             </column>
         </property>
