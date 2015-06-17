@@ -58,7 +58,7 @@ public class CarTypeAction extends BaseAction {
 		Map<String,Object> map=new HashMap<String,Object>();
 		try {
 			this.carTypeService.addBrand(carType);
-			map.put("message", "用户添加成功");
+			map.put("message", "汽车品牌添加成功");
 			map.put("flag", "success");
 		} catch (RbacException e) {
 			map.put("message", e.getMessage());
@@ -114,7 +114,6 @@ public class CarTypeAction extends BaseAction {
 	}
 	
 	public String toCheck(){
-		System.out.println(123123);
 		Map<String,Object> map=new HashMap<String,Object>();
 		Long count=this.carTypeService.getCheckCarTypeName(type_name);
 		if(count>0){

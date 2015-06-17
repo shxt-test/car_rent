@@ -53,7 +53,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	   roleForm.submit();
             }
         }
-
     </script>
 </head>
 
