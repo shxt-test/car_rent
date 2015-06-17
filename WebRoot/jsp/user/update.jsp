@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
             </li>
             <li style="width: 350px;height: 170px;">
-                <div id="localImag"><img id="preview" src="<%=path %>/upload/user/<s:property value="user.photo" default="guest.png"/>"/></div>
+                <div id="localImag"><img id="preview" src="<%=path %>/upload/user/<s:property value="user.photo" default="guest.png"/><s:property value="user.photo" default="guest.png"/>"/></div>
             </li>
             <li><label>&nbsp;</label><input  type="submit" class="mbtn" value="确认保存"/></li>
         </ul>

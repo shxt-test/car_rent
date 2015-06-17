@@ -14,12 +14,14 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 	}
 
 	public void add(CustomerType customerType) {
-		// TODO Auto-generated method stub
+		this.baseDao.add(customerType);
 
 	}
 
 	public void delete(Integer typeId) {
-		System.out.println(111);
+		String sql = "update customer_info set fk_custype_id=null where fk_custype_id="+typeId;
+		this.baseDao.updateBySQL(sql);
+		this.baseDao.delete(CustomerType.class, typeId);
 	}
 
 	public List<CustomerType> list() {
@@ -28,10 +30,15 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService {
 		return (List<CustomerType>) this.baseDao.listSQL(sql, CustomerType.class, false);
 
 	}
-
+	
 	public void update(CustomerType customerType) {
-		// TODO Auto-generated method stub
-
+		CustomerType oldCustomerType = (CustomerType) this.baseDao.load(CustomerType.class, customerType.getC_type_id());
+		oldCustomerType.setC_type_name(customerType.getC_type_name());
+		oldCustomerType.setC_discount(customerType.getC_discount());
+		oldCustomerType.setPhoto(customerType.getPhoto());
+		this.baseDao.update(oldCustomerType);
 	}
-
+	public CustomerType getCustomerTypeById(Integer id){
+		return (CustomerType) this.baseDao.load(CustomerType.class, id);
+	}
 }
