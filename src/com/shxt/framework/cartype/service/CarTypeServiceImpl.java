@@ -9,6 +9,7 @@ import com.shxt.framework.dto.CarTypeDTO;
 import com.shxt.framework.dto.MenuDTO;
 import com.shxt.framework.menu.model.Menu;
 import com.shxt.framework.role.model.Role;
+import com.shxt.framework.user.model.User;
 
 public class CarTypeServiceImpl implements ICarTypeService {
 	private IBaseDao baseDao;
@@ -39,6 +40,17 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		return null;
 	}
 
+	//更改状态
+	public void updatestatus(Integer type_id){
+		CarType carType=(CarType) this.baseDao.load(CarType.class, type_id);
+		if(carType.getType_status().equals("1")){
+			carType.setType_status("2");
+		}else{
+			carType.setType_status("1");
+		}
+		this.baseDao.update(carType);
+	}
+	
 	public List<CarTypeDTO> getCarTypeListAll() {
 		String sql = "select * from car_type where parent_id is null order by type_id asc";
 		List<CarTypeDTO> parentMenuList = (List<CarTypeDTO>) this.baseDao.listSQL(sql, CarTypeDTO.class, false);
@@ -78,9 +90,10 @@ public class CarTypeServiceImpl implements ICarTypeService {
 			//持久化状态
 			public void update(CarType carType) {
 				CarType oldCarType=  (CarType) this.baseDao.load(CarType.class, carType.getType_id());
-			
+				if(carType.getIcon()!=null){
+					oldCarType.setIcon(carType.getIcon());
+				}
 				oldCarType.setType_name(carType.getType_name());
-				
 			}
 	
 		//删除汽车品牌节点
