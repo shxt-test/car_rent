@@ -145,13 +145,13 @@ public class CustomerAction extends BaseAction {
 	
 	public String test(){
 		Map<String,Object> map = new HashMap<String,Object>();
-			Long count = customerService.getTest(id_card);
+			/*Long count = customerService.getTest(id_card);
 			if(count>0){
 				map.put("flag","error");
 				map.put("message", "该省份证已拥被注册");
 			}else{
 				map.put("flag","success");
-			}
+			}*/
 		
 	
 		jsonResult=map;

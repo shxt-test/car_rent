@@ -42,7 +42,7 @@ public interface ICarTypeService {
 	 * @return
 	 */
 	public List<CarType> getChildNodeByCarTypeId(Integer typeId);
-	public List<CarType> getChildCarType(Integer typeId);
+	public CarType getChildCarType(Integer typeId);
 	/**
 	 * 通过角色获取该角色下已拥有的菜单信息
 	 * @param role_id
@@ -78,4 +78,5 @@ public interface ICarTypeService {
 	public List<CarType> getBrandNodeAll();
 	public Long getCheckCarTypeName(String typeName);
 	public List<CharDatas> getCharDatas();
+	public void  updatestatus(Integer type_id);
 }

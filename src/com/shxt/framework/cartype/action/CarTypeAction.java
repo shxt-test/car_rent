@@ -16,15 +16,11 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionContext;
 import com.shxt.base.action.BaseAction;
 import com.shxt.base.exception.RbacException;
-import com.shxt.base.utils.PropertiesConfigHelper;
 import com.shxt.framework.cartype.model.CarType;
 import com.shxt.framework.cartype.service.ICarTypeService;
 import com.shxt.framework.dto.CarTypeDTO;
-import com.shxt.framework.user.model.User;
-
 
 public class CarTypeAction extends BaseAction {
 	private static final long serialVersionUID = -3243344985662707874L;
@@ -131,10 +127,13 @@ public class CarTypeAction extends BaseAction {
 		return JSON;
 	}
 	
+	//核对汽车品牌类型
 	public String toCheckType(){
 		Map<String,Object> map=new HashMap<String,Object>();
-		childNodeList=this.carTypeService.getChildCarType(type_id);
-		map.put("flag", childNodeList);
+		System.out.println(type_id);
+		carType=this.carTypeService.getChildCarType(type_id);
+		System.out.println(carType.getType_name());
+		map.put("flag", carType);
 		this.jsonResult=map;
 		return JSON;
 	}
@@ -154,6 +153,25 @@ public class CarTypeAction extends BaseAction {
 			map.put("message",e.getMessage());
 		}
 		this.jsonResult = map;
+		return JSON;
+	}
+	
+	/**
+	 * 变更状态
+	 * @return
+	 */
+	public String toUpdateStatus(){
+			Map<String,Object> map=new HashMap<String,Object>();
+		try {
+			carTypeService.updatestatus(type_id);
+			map.put("flag", "success");
+			map.put("message", "您的变更成功");
+		}catch (Exception e) {
+			map.put("flag", "error");
+			map.put("message", "您的变更失败，请联系管理员");
+			e.getMessage();
+		}
+		this.jsonResult=map;
 		return JSON;
 	}
 	

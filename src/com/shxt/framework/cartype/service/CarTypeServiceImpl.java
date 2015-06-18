@@ -7,9 +7,7 @@ import com.shxt.base.exception.RbacException;
 import com.shxt.base.model.CharDatas;
 import com.shxt.framework.cartype.model.CarType;
 import com.shxt.framework.dto.CarTypeDTO;
-import com.shxt.framework.dto.MenuDTO;
-import com.shxt.framework.menu.model.Menu;
-import com.shxt.framework.role.model.Role;
+
 
 public class CarTypeServiceImpl implements ICarTypeService {
 	private IBaseDao baseDao;
@@ -72,17 +70,20 @@ public class CarTypeServiceImpl implements ICarTypeService {
 	 * @param type_id
 	 * @return
 	 */
-			public CarType find(Integer type_id) {
-				String hql="from CarType u where 1=1 and u.type_id =?";
-				return  (CarType) this.baseDao.query(hql,type_id);
+		public CarType find(Integer type_id) {
+			String hql="from CarType u where 1=1 and u.type_id =?";
+			return  (CarType) this.baseDao.query(hql,type_id);
+		}
+		//持久化状态
+		public void update(CarType carType) {
+			CarType oldCarType=(CarType)this.baseDao.load(CarType.class,carType.getType_id());
+			if(carType.getIcon()!=null){
+				oldCarType.setIcon(carType.getIcon());
 			}
-			//持久化状态
-			public void update(CarType carType) {
-				CarType oldCarType=  (CarType) this.baseDao.load(CarType.class, carType.getType_id());
-			
-				oldCarType.setType_name(carType.getType_name());
-				
-			}
+
+			oldCarType.setType_name(carType.getType_name());
+		}
+
 	
 		//删除汽车品牌节点
 		public void deleteParent(Integer type_id){
@@ -111,7 +112,7 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		}
 		public List<CarType> getBrandNodeAll(){
 			String hql = "from CarType m where m.parent_id is null ";
-			return (List<CarType>) this.baseDao.list(hql);
+			return (List<CarType>)this.baseDao.list(hql);
 		}
 		
 		//添加汽车类型
@@ -134,20 +135,34 @@ public class CarTypeServiceImpl implements ICarTypeService {
 			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id is null";
 			return (List<CarType>) this.baseDao.listSQL(sql, null, CarType.class, true);
 		}
+		public List<CharDatas> getCharDatas(){
+			String sql = "select IFNULL(r.type_name,'无品牌类型') lable ,count(u.car_id) value from car_info u LEFT JOIN car_type  r on u.fk_carType_id=r.type_id GROUP BY r.type_name";
+			return (List<CharDatas>) this.baseDao.listSQL(sql, CharDatas.class, false);
+		}
+
+
+		public CarType getChildCarType(Integer typeId) {
+			String sql = "select mm.* from car_type mm where mm.type_id =?";
+			return (CarType) this.baseDao.querySQL(sql, typeId, CarType.class, true);
+		}
+
 		public List<CarType> getTypeList(Integer typeId) {
 			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id=?";
 			return (List<CarType>) this.baseDao.listSQL(sql, typeId, CarType.class, true);
 		}
-
-
-		public List<CharDatas> getCharDatas() {
-			// TODO Auto-generated method stub
-			return null;
+		// 更改状态
+		public void  updatestatus(Integer type_id){
+			CarType carType=(CarType) this.baseDao.load(CarType.class, type_id);
+			if(carType.getType_status().equals("1")){
+				carType.setType_status("2");
+			}else{
+				carType.setType_status("1");
+			}
+			this.baseDao.update(carType);
 		}
 
+	
 
-		public List<CarType> getChildCarType(Integer typeId) {
-			// TODO Auto-generated method stub
-			return null;
-		}
+
+		
 }
