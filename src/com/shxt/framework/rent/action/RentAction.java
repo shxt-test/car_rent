@@ -43,7 +43,6 @@ public class RentAction extends BaseAction {
 	}
 	
 	public String returnCar(){
-		System.out.println(rent_id);
 		this.toJsp="rent/returnCar";
 		return DISPATCHER;
 	}
@@ -52,14 +51,9 @@ public class RentAction extends BaseAction {
 	 * @return
 	 */
 	public String toCheck(){
-		Map<String,Object> map = new HashMap<String,Object>();
-		try {
-			System.out.println(id_card+"********"+rent_id);
-			map = rentService.returnCar(id_card);
-			map.get(customerInfo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Map<String,Object> map ;
+		
+		map = rentService.returnCar(id_card,rent_id);
 		jsonResult=map;
 		return JSON;
 	}

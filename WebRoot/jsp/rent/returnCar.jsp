@@ -237,8 +237,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
           
       function toCheck(){
+    	  var rent_id=$("#rent_id").val();
           var id_card=$("#id_card").val();
-         $.post("sys/toCheckRentAction.action",{id_card:id_card},function(data){
+         $.post("sys/toCheckRentAction.action",{id_card:id_card,rent_id:rent_id},function(data){
+        	 alert(data.map)
         	$("#cus_name").html(data.cus.cus_name);
             });
       }
@@ -251,6 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="mformbody">
         <form action="sys/addCustomerAction.action" name="cusInfoForm" method="post" enctype="multipart/form-data">
         <ul class="mforminfo">
+        <li> <input type="hidden" id="rent_id" value="${rent_id}"/>   </li>
             <li><label>身份证号码</label><input name="cusInfo.cus_id_card" id="id_card" type="text" class="mdfinput" onblur="toCheck()" style="width: 400px;" /><span id="message"></span></li>
             <li><label>车牌号码</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
             <li><label>保证金</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>

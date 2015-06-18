@@ -28,13 +28,12 @@ public class RentServiceImpl implements IRentService {
 		return this.baseDao.find(hql, pageBean);
 	}
 	
-	public Map returnCar(String id_card) {
+	public Map returnCar(String id_card,Integer rent_id) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		
 		String hql=" from CustomerInfo where cus_id_card=?";
 		CustomerInfo customerInfo=(CustomerInfo) this.baseDao.query(hql, id_card);
-		String sql=" select * from rent_record where fk_cusinfo_id=? and car_code=?";
-		RentInfo rentInfo  = (RentInfo) this.baseDao.querySQL(sql, new Object[]{customerInfo.getCus_id(),1}, RentInfo.class, true);
+		String sql=" select * from rent_record where rent_id=?";
+		RentInfo rentInfo  = (RentInfo) this.baseDao.querySQL(sql,rent_id, RentInfo.class, true);
 		map.put("customerInfo", customerInfo);
 		map.put("rentInfo", rentInfo);
 		return map;

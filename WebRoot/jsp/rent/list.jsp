@@ -184,8 +184,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
             function returnInfoDialog(rent_id){
             //判断改用户选择
-            
-            alert(rent_id)
                 var d = top.dialog({
                     width:700,
                     height:600,
