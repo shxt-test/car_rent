@@ -153,8 +153,8 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		}
 
 
-		public List<CarType> getChildCarType(Integer typeId) {
+		public CarType getChildCarType(Integer typeId) {
 			String sql = "select mm.* from car_type mm where mm.type_id =?";
-			return (List<CarType>) this.baseDao.listSQL(sql, typeId, CarType.class, true);
+			return (CarType) this.baseDao.querySQL(sql, typeId, CarType.class, true);
 		}
 }

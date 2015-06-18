@@ -131,10 +131,13 @@ public class CarTypeAction extends BaseAction {
 		return JSON;
 	}
 	
+	//核对汽车品牌类型
 	public String toCheckType(){
 		Map<String,Object> map=new HashMap<String,Object>();
-		childNodeList=this.carTypeService.getChildCarType(type_id);
-		map.put("flag", childNodeList);
+		System.out.println(type_id);
+		carType=this.carTypeService.getChildCarType(type_id);
+		System.out.println(carType.getType_name());
+		map.put("flag", carType);
 		this.jsonResult=map;
 		return JSON;
 	}

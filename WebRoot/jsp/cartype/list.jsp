@@ -109,7 +109,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     alert("该品牌禁用，不能进行修改操作");
                     return false;
                 }else{
-                	 var d = top.dialog({
+                	var status = $.trim(radio.parent().parent().find("a").find("font").text());
+                	$.post("sys/toCheckTypeCarTypeAction.action",{type_id:CarType_id},function(data){
+                		if(status!=data.flag.type_name){
+                		  var d = top.dialog({
                         id:"rightFrame",
                         width:700,
                         height:350,
@@ -120,9 +123,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            // alert(this.returnValue);
                            window.location.reload();
                         }
-                    }
-                    });
+                        }
+                           });
                     d.showModal();
+                		}
+                	else{
+                		alert("该类型已锁定，不能进行编辑操作")
+                	}
+                	});
+                	
                 }
         }}
       
