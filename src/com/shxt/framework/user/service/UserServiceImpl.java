@@ -68,7 +68,7 @@ public class UserServiceImpl implements IUserService {
 		
 	}
 	
-	public void UpdateStatus(Integer user_id){
+	public void updateStatus(Integer user_id){
 		
 		User user = (User) this.baseDao.load(User.class, user_id);
 		if(user.getAccount_status().equals("1")){

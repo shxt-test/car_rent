@@ -157,25 +157,6 @@ public class CarTypeAction extends BaseAction {
 		return JSON;
 	}
 	
-	/**
-	 * 变更状态
-	 * @return
-	 */
-	public String toUpdateStatus(){
-			Map<String,Object> map=new HashMap<String,Object>();
-		try {
-			carTypeService.updatestatus(type_id);
-			map.put("flag", "success");
-			map.put("message", "您的变更成功");
-		}catch (Exception e) {
-			map.put("flag", "error");
-			map.put("message", "您的变更失败，请联系管理员");
-			e.getMessage();
-		}
-		this.jsonResult=map;
-		return JSON;
-	}
-	
 	//添加汽车品牌
 	public String toAddParent(){
 		carTypeList =  carTypeService.getCarTypeListAll();

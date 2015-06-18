@@ -16,6 +16,5 @@ public interface ICustomerTypeService {
 	public void delete(Integer type_id);
 	
 	public List<CustomerType> list();
-	
-	public CustomerType getCustomerTypeById(Integer id);
+
 }
