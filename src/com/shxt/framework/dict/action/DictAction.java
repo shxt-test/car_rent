@@ -13,6 +13,8 @@ public class DictAction extends BaseAction {
 	private String pro_id;
 	
 	private String user_name;
+	
+	private String bra_id;
 
 	public String toLoadProvince() {
 		IDictService dictService = new DictServiceImpl();
@@ -44,6 +46,32 @@ public class DictAction extends BaseAction {
 		return JSON;
 	}
 
+	/**
+	 * 获取所有品牌
+	 * @return
+	 */
+	public String toLoadBrand() {
+		IDictService dictService = new DictServiceImpl();
+
+		List<AddressDict> dataList = dictService.getBrandList();
+		System.out.println(dataList);
+		this.jsonResult = dataList;
+
+		return JSON;
+	}
+	/**
+	 * 获取品牌下的所有类型
+	 * @return
+	 */
+	public String toLoadType() {
+		IDictService dictService = new DictServiceImpl();
+
+		List<AddressDict> dataList = dictService.getTypeListByBraId(Integer.parseInt(bra_id));
+		System.out.println(dataList);
+		this.jsonResult = dataList;
+		return JSON;
+	}
+	
 	public String getPro_id() {
 		return pro_id;
 	}
@@ -58,5 +86,13 @@ public class DictAction extends BaseAction {
 
 	public void setUser_name(String userName) {
 		user_name = userName;
+	}
+
+	public String getBra_id() {
+		return bra_id;
+	}
+
+	public void setBra_id(String braId) {
+		bra_id = braId;
 	}
 }

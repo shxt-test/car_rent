@@ -41,17 +41,6 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		return null;
 	}
 
-	//更改状态
-	public void updatestatus(Integer type_id){
-		CarType carType=(CarType) this.baseDao.load(CarType.class, type_id);
-		if(carType.getType_status().equals("1")){
-			carType.setType_status("2");
-		}else{
-			carType.setType_status("1");
-		}
-		this.baseDao.update(carType);
-	}
-	
 	public List<CarTypeDTO> getCarTypeListAll() {
 		String sql = "select * from car_type where parent_id is null order by type_id asc";
 		List<CarTypeDTO> parentMenuList = (List<CarTypeDTO>) this.baseDao.listSQL(sql, CarTypeDTO.class, false);
@@ -94,8 +83,10 @@ public class CarTypeServiceImpl implements ICarTypeService {
 			if(carType.getIcon()!=null){
 				oldCarType.setIcon(carType.getIcon());
 			}
+
 			oldCarType.setType_name(carType.getType_name());
 		}
+
 	
 		//删除汽车品牌节点
 		public void deleteParent(Integer type_id){
@@ -144,7 +135,7 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		}
 
 		public List<CarType> getEnableList() {
-			String sql = "select mm.* from car_type mm where mm.type_status=1";
+			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id is null";
 			return (List<CarType>) this.baseDao.listSQL(sql, null, CarType.class, true);
 		}
 		public List<CharDatas> getCharDatas(){
@@ -157,4 +148,15 @@ public class CarTypeServiceImpl implements ICarTypeService {
 			String sql = "select mm.* from car_type mm where mm.type_id =?";
 			return (CarType) this.baseDao.querySQL(sql, typeId, CarType.class, true);
 		}
+
+		public List<CarType> getTypeList(Integer typeId) {
+			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id=?";
+			return (List<CarType>) this.baseDao.listSQL(sql, typeId, CarType.class, true);
+		}
+
+
+	
+
+
+		
 }

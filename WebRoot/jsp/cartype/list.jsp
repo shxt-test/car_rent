@@ -109,10 +109,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     alert("该品牌禁用，不能进行修改操作");
                     return false;
                 }else{
+<<<<<<< HEAD
                 	var status = $.trim(radio.parent().parent().find("a").find("font").text());
                 	$.post("sys/toCheckTypeCarTypeAction.action",{type_id:CarType_id},function(data){
                 		if(status!=data.flag.type_name){
                 		  var d = top.dialog({
+=======
+                     var d = top.dialog({
+>>>>>>> refs/heads/master
                         id:"rightFrame",
                         width:700,
                         height:350,
@@ -153,22 +157,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          }
        
         function toChildShowWin(obj,CarType_id){
-        	var content = '<a href="javascript:void(0)" onclick="toUpdateTypeDialog(\''+CarType_id+'\')"><font color="blue" >编辑</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
+            var content = '<a href="javascript:void(0)" onclick="toUpdateTypeDialog(\''+CarType_id+'\')"><font color="blue" >编辑</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
                             +'<a href="javascript:void(0)" onclick="deleteChildDialog(\''+CarType_id+'\')"><font color="blue" >变更</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
                             +'<a href="javascript:void(0)" onclick="toLookTypeDialog(\''+CarType_id+'\')"><font color="blue" >查看</font></a>'
-				   var show_dialog = dialog({
-					 id:"show_dialog",
-				    align: 'top',
-				    content: content,
-				     quickClose: true// 点击空白处快速关闭
-				});
-				show_dialog.show(obj);
-				
+                   var show_dialog = dialog({
+                     id:"show_dialog",
+                    align: 'top',
+                    content: content,
+                     quickClose: true// 点击空白处快速关闭
+                });
+                show_dialog.show(obj);
+                
         }
         
         //变更品牌操作
         function deleteParentDialog(){
-        	 //判断改用户选择
+             //判断改用户选择
             //  可以用struct标签获取id<s:property value="#session.session_user.user_id"/>
             var radio = $("input[name='id']:checked");
                if(radio.val()){
@@ -217,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
         //变更类型为启用
         function deleteChildDialog(CarType_id){
-        	    var radio = $("input[name='id']:checked");
+                var radio = $("input[name='id']:checked");
                if(radio.val()){
                 var status = $.trim(radio.parent().parent().find("span").text());
                 if(status=="禁用"){

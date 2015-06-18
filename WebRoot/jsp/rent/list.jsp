@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //成功需要注意jquery的版本必须是1.7+以上
             var d = top.dialog({
                 width:700,
-                height:700,
+                height:600,
                 title: '新建客户',
                 url:'sys/toAddCustomerAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
                 onclose: function () {
@@ -74,7 +74,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    //自动刷新
                    window.location.reload();
                 }
-
             }
             });
             d.showModal();
@@ -183,17 +182,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
         
-            function toguaInfoDialog(cus_id){
+            function returnInfoDialog(rent_id){
             //判断改用户选择
-         
-                //成功需要注意jquery的版本必须是1.7+以上
                 var d = top.dialog({
                     width:700,
-                    height:210,
+                    height:600,
                     title: '担保人信息',
-                    url:'sys/toLookCustomerAction.action?cus_id='+cus_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
-	                ok: function () {},
-					});
+                    url:'sys/returnCarRentAction.action?rent_id='+rent_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                    ok: function () {},
+                    });
                 d.showModal();
          }
     </script>
@@ -212,18 +209,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- 工具栏 -->
         <div class="tools" style="padding-top: 5px;">
              <!-- 查询条件 -->
-            <form action="sys/findCustomerAction.action" method="post"
+            <form action="sys/findRentAction.action" method="post"
                 name="searchForm">
                 <ul class="seachform">
                     <li>
-                        <label>姓名</label>
-                        <s:textfield name="query.cus_name"  cssClass="scinput" />
+                        <label>车牌号</label>
+                        <s:textfield name="query.car_code"  cssClass="scinput" />
                     </li>
-                    <li>
-                        <label>省份证号码</label>
-                           <s:textfield name="query.cus_id_card" cssClass="scinput" />
-                    </li>
-
                     <li>
                         <label>&nbsp</label>
                         <input type="button" class="scbtn" value="查询"
@@ -246,49 +238,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <table class="tablelist">
             <thead>
                 <tr >
-                    <th></th>
-                    <th >编号</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>联系方式</th>
-                    <th>家庭住址</th>
-                    <th>工作单位</th>
-                    <th>身份证号</th>
-                    <th>客户的类型</th>
-                    <th>驾驶证号码</th> 
-                    <th>状态</th> 
-                    <th>担保人信息</th> 
+                    <th>编号</th>
+                    <th>车牌号</th>
+                    <th>车辆名称</th>
+                    <th>车辆颜色</th>
+                    <th>购买价格</th>
+                    <th>归还车辆</th>
                     
                 </tr>
             </thead>
         <tbody>
-            <s:iterator value="pageBean.datas" var="cus" status="st">
+            <s:iterator value="pageBean.datas" var="rent" status="st">
                 <tr>
-                    <td><input name="id" type="radio" value="<s:property value="#cus.cus_id"/>" /></td>
                     <td height="60px" align="center"><s:property value="#st.count"/></td>
-                    <td><s:property value="#cus.cus_name"/></td>
-                    <td><s:property value="#cus.cus_sex"/></td>
-                    <td><s:property value="#cus.cus_tel"/></td>
-                    <td><s:property value="#cus.cus_address"/></td>
-                    <td><s:property value="#cus.cus_work_address"/></td>
-                    <td><s:property value="#cus.cus_id_card"/></td>
-                    <td><s:property value="#cus.customer_type.c_type_name"/></td>
-                    <td><s:property value="#cus.cus_driver_code"/></td>
-                    <td>
-                         <s:if test="#cus.cus_status==1">
-                              <span style="color:green;font-weight:blod;">可用</span>
-                          </s:if>
-                          <s:else>
-                               <span style="color:red;font-weight:blod;">禁用</span>
-                          </s:else>
-                    </td>
-                    <td><a href="javascript:void(0)" onclick="toguaInfoDialog(${cus_id})"><font color="blue">担保人信息</font></a></td>
+                    <td><s:property value="#rent.car_code"/></td>
+                    <td><s:property value="#rent.carInfo.car_name"/></td>
+                    <td><s:property value="#rent.carInfo.car_color"/></td>
+                    <td><s:property value="#rent.carInfo.buy_price"/></td>
+                    <td><a href="javascript:void(0)" onclick="returnInfoDialog(${rent_id})"><font color="blue">归还</font></a></td>
                 </tr> 
             </s:iterator>
-           
-        
-      
-    
         </tbody>
     </table>
     

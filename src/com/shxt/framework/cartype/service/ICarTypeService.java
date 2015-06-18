@@ -28,6 +28,12 @@ public interface ICarTypeService {
 	 */
 	
 	public List<CarType> getEnableList(); 
+	/**
+	 * 得到启用子类型列表
+	 * @return
+	 */
+	
+	public List<CarType> getTypeList(Integer typeId); 
 
 	
 	/**
@@ -64,11 +70,7 @@ public interface ICarTypeService {
 	 * @return
 	 */
 	public CarType find(Integer type_id);
-	/**
-	 * 更改品牌状态
-	 * @param type_id
-	 */
-	public void updatestatus(Integer type_id);
+	
 	public void update(CarType carType);
 	public void deleteParent(Integer type_id);
 	public void addChild(CarType carType);

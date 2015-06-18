@@ -204,21 +204,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
 
     function add(){
-    	 $("#message").html("");
+         $("#message").html("");
         var id_card =  $.trim($("#id_card").val());
-    	if(id_card==""){
-    		$("#message").css("color","red");
+        if(id_card==""){
+            $("#message").css("color","red");
                 $("#message").html("身份证号不能为空");
-    		return false;
-    	}
-    	 $("#cus_name_message").html("");
+            return false;
+        }
+         $("#cus_name_message").html("");
         var cus_name =  $.trim($("#cus_name").val());
-    	if(cus_name==""){
-    		$("#cus_name_message").css("color","red");
+        if(cus_name==""){
+            $("#cus_name_message").css("color","red");
                 $("#cus_name_message").html("客户名不能为空");
             return false;
-    	}
-    	 $("#driver_code_message").html("");
+        }
+         $("#driver_code_message").html("");
         var cus_driver_code = $.trim($("#cus_driver_code").val());
        
         if(cus_driver_code==""){
@@ -229,14 +229,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          $("#telmessage").html("");
         var cus_tel = $.trim($("#cus_tel").val());
         if(cus_tel==""){
-        	 $("#telmessage").css("color","red");
+             $("#telmessage").css("color","red");
                 $("#telmessage").html("联系方式不能为空");
             return false;
         }
         cusInfoForm.submit();
     }
           
-      
+      function toCheck(){
+    	  var rent_id=$("#rent_id").val();
+          var id_card=$("#id_card").val();
+         $.post("sys/toCheckRentAction.action",{id_card:id_card,rent_id:rent_id},function(data){
+        	 alert(data.map)
+        	$("#cus_name").html(data.cus.cus_name);
+            });
+      }
 
     </script>
 </head>
@@ -246,37 +253,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="mformbody">
         <form action="sys/addCustomerAction.action" name="cusInfoForm" method="post" enctype="multipart/form-data">
         <ul class="mforminfo">
-            <li><label>身份证号码</label><input name="cusInfo.cus_id_card" id="id_card" type="text" onblur="isIDno()" class="mdfinput" style="width: 400px;"  placeholder="必填"/><span id="message"></span></li>
-            <li><label>姓名</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  placeholder="必填"/><span id="cus_name_message"></span></li>
-            <li><label>家庭住址</label><input name="cusInfo.cus_address" id="cus_address" type="text" class="mdfinput" /></li>
-            <li><label>工作单位</label><input name="cusInfo.cus_work_address" id=" cus_work_address" type="text" class="mdfinput" /></li>
-            <li><label>联系方式</label><input name="cusInfo.cus_tel" id="cus_tel" type="text" class="mdfinput"  placeholder="必填"/><span id="telmessage"></span></li>
-            <li><label>驾驶证号码</label><input name="cusInfo.cus_driver_code" id="cus_driver_code" type="text" class="mdfinput"  placeholder="必填"/><span id="driver_code_message"></span></li>
-            <li><label>性别</label>
-           <s:select list="#{'男':'男','女':'女'}" id="cus_sex" cssClass="select_show" cssStyle="width: 150px;" headerKey="" headerValue="请选择性别"
-            name="cusInfo.cus_sex"
-            ></s:select>
-            </li>
-             <li><label>客户类型</label>
-          <s:select name="cusInfo.customer_type.c_type_id" id="c_type_id" list="cusTypeList" listKey="c_type_id"
-           listValue="c_type_name" cssClass="select_show" headerKey="" headerValue="请选择用户"></s:select>
-            </li> 
-        <li>---------------------------------------担保人信息-----------------------------------------------------</li>
-            <li><label>身份证号码</label><input name="cusInfo.gua_id_card" id="gua_id_card" type="text" class="mdfinput" style="width: 400px;" onblur="isIDno()"/><span id="gua_message"></span></li>
-            <li><label>姓名</label><input name="cusInfo.gua_name" id="gua_name" type="text" class="mdfinput" /></li>
-             <li><label>性别</label>
-           <s:select list="#{'男':'男','女':'女'}" id="gua_sex" cssClass="select_show" cssStyle="width: 150px;" headerKey="" headerValue="请选择性别"
-            name="cusInfo.gua_sex"
-            ></s:select>
-            <li><label>家庭住址</label><input name="cusInfo.gua_address" id="gua_address" type="text" class="mdfinput" /></li>
-            <li><label>工作单位</label><input name="cusInfo.gua_work_address" id=" gua_work_address" type="text" class="mdfinput" /></li>
-            <li><label>联系方式</label><input name="cusInfo.gua_tel" id="gua_tel" type="text" class="mdfinput" placeholder="必填"/><span id="gua_telmessage"></span></li>
-            <li><label>驾驶证号码</label><input name="cusInfo.gua_driver_code" id="gua_driver_code" type="text" class="mdfinput" /></li>
-            <li><label>与担保人关系</label><input name="cusInfo.relation" id="relation" type="text" class="mdfinput" /></li>
-            </ul>
-            <li><label>&nbsp;</label><input  type="button" onclick="add()" class="mbtn" value="确认保存"/></li>
+        <li> <input type="hidden" id="rent_id" value="${rent_id}"/>   </li>
+            <li><label>身份证号码</label><input name="cusInfo.cus_id_card" id="id_card" type="text" class="mdfinput" onblur="toCheck()" style="width: 400px;" /><span id="message"></span></li>
+            <li><label>车牌号码</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>保证金</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>租赁金额</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>租赁天数</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>开始日期</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>应归还日期</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>实际归还日期</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput" /><span id="cus_name_message"></span></li>
+            <li><label>意见</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  /><span id="cus_name_message"></span></li>
+            <li>---------------------------------车辆信息------------------------------------------------</li>
+             <li><label>车牌号码</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  /><span id="cus_name_message"></span></li>
+            <li><label>保证金</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  /><span id="cus_name_message"></span></li>
+            <li>----------------------------------客户信息---------------------------------------------</li>
+             <li><label>姓名</label><input  name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  /><span id="cus_name_message"></span></li>
+            <li><label>驾驶证号码</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  /><span id="cus_name_message"></span></li>
+            <li><label>客户类型</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  /><span id="cus_name_message"></span></li>
+            <li><label>&nbsp;</label><input   type="button" onclick="add()" class="mbtn" value="确认保存"/></li>
         </form>
     </div>
 </body>
-
 </html>

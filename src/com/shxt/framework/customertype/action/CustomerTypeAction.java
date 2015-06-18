@@ -1,7 +1,9 @@
 package com.shxt.framework.customertype.action;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.shxt.base.action.BaseAction;
 import com.shxt.framework.customertype.model.CustomerType;
@@ -17,13 +19,27 @@ public class CustomerTypeAction extends BaseAction{
 	
 	private CustomerType customerType; 
 	
-	private File photo;
-	
-	private String photoFileName;
-	
-	private String photoCountentType;
 	
 	private ICustomerTypeService customerTypeService;
+	
+	public String add(){
+		System.out.println(customerType.getC_type_name());
+		Map<String,Object> map = new HashMap<String,Object>();
+		try {
+			
+			customerType.setPhoto(this.getSaveName());
+			customerTypeService.add(customerType);
+			
+			map.put("message","客户类型添加成功");
+			map.put("flag","success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message","客户类型添加失败,异常信息为:"+e.getMessage());
+			map.put("flag","error");
+		}
+		this.jsonResult = map;
+		return JSON;
+	}
 	
 	public String toAdd(){
 		
@@ -76,30 +92,6 @@ public class CustomerTypeAction extends BaseAction{
 
 	public void setCustomerType(CustomerType customerType) {
 		this.customerType = customerType;
-	}
-
-	public File getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(File photo) {
-		this.photo = photo;
-	}
-
-	public String getPhotoFileName() {
-		return photoFileName;
-	}
-
-	public void setPhotoFileName(String photoFileName) {
-		this.photoFileName = photoFileName;
-	}
-
-	public String getPhotoCountentType() {
-		return photoCountentType;
-	}
-
-	public void setPhotoCountentType(String photoCountentType) {
-		this.photoCountentType = photoCountentType;
 	}
 
 	public void setCustomerTypeService(ICustomerTypeService customerTypeService) {
