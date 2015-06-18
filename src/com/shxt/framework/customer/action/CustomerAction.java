@@ -117,7 +117,6 @@ public class CustomerAction extends BaseAction {
 	 * @return
 	 */
 	public String toUpdateStatus(){
-		System.out.println(1);
 
 		Map<String , Object> map = new HashMap<String, Object>();
 		try {

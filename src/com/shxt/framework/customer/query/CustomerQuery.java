@@ -11,7 +11,9 @@ public class CustomerQuery{
 	private String cus_sex;
 	/**客户类型*/
 	private String customer_type;
-
+	
+	private String cus_id;
+	
 	public String getCus_id_card() {
 		return cus_id_card;
 	}
@@ -42,5 +44,13 @@ public class CustomerQuery{
 
 	public void setCustomer_type(String customerType) {
 		customer_type = customerType;
+	}
+
+	public String getCus_id() {
+		return cus_id;
+	}
+
+	public void setCus_id(String cusId) {
+		cus_id = cusId;
 	}
 }

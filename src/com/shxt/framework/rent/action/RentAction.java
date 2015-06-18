@@ -6,6 +6,8 @@ import java.util.Map;
 import com.shxt.base.action.BaseAction;
 import com.shxt.base.dao.PageBean;
 import com.shxt.framework.customer.model.CustomerInfo;
+import com.shxt.framework.rent.model.RentInfo;
+import com.shxt.framework.rent.query.Query;
 import com.shxt.framework.rent.service.IRentService;
 
 public class RentAction extends BaseAction {
@@ -13,9 +15,18 @@ public class RentAction extends BaseAction {
 	
 	private String id_card;
 	
+	private Integer rent_id;
+	
+	private Query query;
+	
 	private CustomerInfo customerInfo ;
 	
 	private PageBean pageBean;
+	
+	private RentInfo rentInfo;
+	
+	private String car_code;
+	
 	
 	private IRentService rentService;
 	public void setRentService(IRentService rentService) {
@@ -26,26 +37,29 @@ public class RentAction extends BaseAction {
 		if(pageBean==null){
 			pageBean = new PageBean();
 		}
-		this.pageBean = rentService.find(pageBean);
+		this.pageBean = rentService.find(query,pageBean);
 		this.toJsp="rent/list";
 		return DISPATCHER;
 	}
 	
 	public String returnCar(){
-		
+		System.out.println(rent_id);
 		this.toJsp="rent/returnCar";
 		return DISPATCHER;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public String toCheck(){
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
-			customerInfo = rentService.returnCar(id_card);
-			System.out.println(customerInfo.getCus_name());
+			System.out.println(id_card+"********"+rent_id);
+			map = rentService.returnCar(id_card);
+			map.get(customerInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		map.put("cus", customerInfo);
 		jsonResult=map;
 		return JSON;
 	}
@@ -72,6 +86,38 @@ public class RentAction extends BaseAction {
 
 	public void setPageBean(PageBean pageBean) {
 		this.pageBean = pageBean;
+	}
+
+	public Query getQuery() {
+		return query;
+	}
+
+	public void setQuery(Query query) {
+		this.query = query;
+	}
+
+	public RentInfo getRentInfo() {
+		return rentInfo;
+	}
+
+	public void setRentInfo(RentInfo rentInfo) {
+		this.rentInfo = rentInfo;
+	}
+
+	public String getCar_code() {
+		return car_code;
+	}
+
+	public void setCar_code(String carCode) {
+		car_code = carCode;
+	}
+
+	public Integer getRent_id() {
+		return rent_id;
+	}
+
+	public void setRent_id(Integer rentId) {
+		rent_id = rentId;
 	}
 
 	
