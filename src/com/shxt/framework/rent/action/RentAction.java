@@ -36,7 +36,7 @@ public class RentAction extends BaseAction {
 		if(pageBean==null){
 			pageBean = new PageBean();
 		}
-		this.pageBean = rentService.find(query,pageBean);
+		this.pageBean = rentService.find(query, pageBean);
 		this.toJsp="rent/list";
 		return DISPATCHER;
 	}
