@@ -10,6 +10,7 @@ import com.shxt.framework.dto.CarTypeDTO;
 import com.shxt.framework.dto.MenuDTO;
 import com.shxt.framework.menu.model.Menu;
 import com.shxt.framework.role.model.Role;
+import com.shxt.framework.user.model.User;
 
 
 public class CarTypeServiceImpl implements ICarTypeService {
@@ -153,7 +154,16 @@ public class CarTypeServiceImpl implements ICarTypeService {
 			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id=?";
 			return (List<CarType>) this.baseDao.listSQL(sql, typeId, CarType.class, true);
 		}
-
+		// 更改状态
+		public void  updatestatus(Integer type_id){
+			CarType carType=(CarType) this.baseDao.load(CarType.class, type_id);
+			if(carType.getType_status().equals("1")){
+				carType.setType_status("2");
+			}else{
+				carType.setType_status("1");
+			}
+			this.baseDao.update(carType);
+		}
 
 	
 

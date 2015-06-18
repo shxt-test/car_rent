@@ -78,4 +78,5 @@ public interface ICarTypeService {
 	public List<CarType> getBrandNodeAll();
 	public Long getCheckCarTypeName(String typeName);
 	public List<CharDatas> getCharDatas();
+	public void  updatestatus(Integer type_id);
 }

@@ -163,7 +163,7 @@ public class CarTypeAction extends BaseAction {
 	public String toUpdateStatus(){
 			Map<String,Object> map=new HashMap<String,Object>();
 		try {
-			//carTypeService.updatestatus(type_id);
+			carTypeService.updatestatus(type_id);
 			map.put("flag", "success");
 			map.put("message", "您的变更成功");
 		}catch (Exception e) {
