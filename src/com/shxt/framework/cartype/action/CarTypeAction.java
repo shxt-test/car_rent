@@ -131,6 +131,8 @@ public class CarTypeAction extends BaseAction {
 		return JSON;
 	}
 	
+
+	
 	public String toCheckType(){
 		Map<String,Object> map=new HashMap<String,Object>();
 		childNodeList=this.carTypeService.getChildCarType(type_id);
