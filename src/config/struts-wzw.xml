@@ -12,5 +12,10 @@
                 <param name="root">jsonResult</param>
             </result>
         </action>
+        <action name="*DictAction" class="com.shxt.framework.dict.action.DictAction" method="{1}">
+            <result name="json" type="json">
+                <param name="root">jsonResult</param>
+            </result>
+        </action>  
     </package>
 </struts>

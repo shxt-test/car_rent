@@ -13,10 +13,15 @@ public interface ICarInfoSerivece {
 	 */
 	public void add(CarInfo carInfo);
 	/**
-	 * 修改汽车信息
+	 * 根据ID修改汽车信息
 	 * @param carInfo
 	 */
 	public void update(Integer carInfo_id);
+	/**
+	 * 修改汽车信息
+	 * @param carInfo
+	 */
+	public void updateAll(CarInfo carInfo);
 	/**
 	 * 根据ID得到汽车信息
 	 * @param carInfo
@@ -24,13 +29,27 @@ public interface ICarInfoSerivece {
 	public CarInfo getCarInfoById(Integer carInfo_id);
 	/**
 	 * 汽车分页
-	 * @param carInfo
+	 * @param query
+	 * @param pageBean
 	 */
 	public PageBean find(CarInfoQuery query,PageBean pageBean);
 	/**
 	 * 根据ID修改汽车的状态
+	 * @param carInfo_id
+	 */
+	public void updateStatus(Integer carInfo_id);
+	/**
+	 * 可预定车辆的信息分页
+	 */
+	public PageBean findByReserve(PageBean pageBean);
+	/**
+	 * 预定操作
 	 * @param carInfo
 	 */
-	public void UpdateStatus(Integer carInfo_id);
+	public void addReserve(CarInfo carInfo);
+	/**
+	 * 取消预定车辆的信息分页
+	 */
+	public PageBean findByCancelReserve(PageBean pageBean);
 	
 }

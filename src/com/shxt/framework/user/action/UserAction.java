@@ -175,7 +175,7 @@ public class UserAction extends BaseAction {
 
 		Map<String , Object> map = new HashMap<String, Object>();
 		try {
-			userService.UpdateStatus(user_id);
+			userService.updateStatus(user_id);
 			map.put("flag", "success");
 			map.put("message", "变更成功");
 		} catch (Exception e) {

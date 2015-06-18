@@ -10,4 +10,7 @@ public interface IDictService {
 	public List<AddressDict> getProvinceList();
 	public List<AddressDict> getCityListByProId(Integer pro_id );
 	public List<User> getUserByName(String name );
+
+	public List<AddressDict> getBrandList();
+	public List<AddressDict> getTypeListByBraId(Integer bra_id );
 }

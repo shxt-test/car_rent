@@ -130,7 +130,11 @@ public class CarTypeServiceImpl implements ICarTypeService {
 		}
 
 		public List<CarType> getEnableList() {
-			String sql = "select mm.* from car_type mm where mm.type_status=1";
+			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id is null";
 			return (List<CarType>) this.baseDao.listSQL(sql, null, CarType.class, true);
+		}
+		public List<CarType> getTypeList(Integer typeId) {
+			String sql = "select mm.* from car_type mm where mm.type_status=1 and mm.parent_id=?";
+			return (List<CarType>) this.baseDao.listSQL(sql, typeId, CarType.class, true);
 		}
 }

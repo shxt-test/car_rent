@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Struts2Diagram version="2.0">
   <package name="wzw" location="0,0" size="0,0">
-    <action name="*CustomerAction" location="0,0" size="0,0">
+    <action name="*CarInfoAction" location="0,0" size="0,0">
       <result name="dispatcher">
         <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
       </result>

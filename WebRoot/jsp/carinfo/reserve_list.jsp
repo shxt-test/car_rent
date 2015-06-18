@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title> 汽车列表 </title>
+    <title> 汽车可预订列表 </title>
     <link href="<%=path %>/resource/admin/css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="<%=path %>/resource/admin/js/jquery.js"></script>
      <script type="text/javascript">
@@ -51,13 +51,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         
         $(function(){
+            $(".tablelist tbody tr ").click(function(){
+                $(this).find(":radio").prop("checked",true);
+            })
+        })
+        
+        $(function(){
             toLoadBrand();
         });
         //加载所有品牌
         function toLoadBrand(){
             $.post("sys/toLoadBrandCarInfoAction.action",function(data){
                 for(var i=0;i<data.length;i++){
-                    $("#brand").append("<option  value='"+data[i].type_id+"'>"+data[i].type_name+"</option>");
+                    $("#brand").append("<option name='' value='"+data[i].type_id+"'>"+data[i].type_name+"</option>");
                     
                 }
             })
@@ -76,116 +82,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             })
         };
         
-    </script>
-    
-    <script type="text/javascript">
-        $(function(){
-        	$(".tablelist tbody tr ").click(function(){
-        		$(this).find(":radio").prop("checked",true);
-        	})
-        })
-        
-        /**
-         * 关于汽车添加操作
-         */
-         function toAddDialog(){
-        	//成功需要注意jquery的版本必须是1.7+以上
-            var d = top.dialog({
-                width:700,
-                height:700,
-                title: '添加汽车',
-                url:'sys/toAddCarInfoAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
-                onclose: function () {
-                if (this.returnValue=="success") {
-                   // alert(this.returnValue);
-                   //自动刷新
-                   window.location.reload();
-                }
-
-            }
-            });
-            d.showModal();
-         }
-        /**
-         * 关于汽车信息的更新操作
-         * */
-         function toUpdateDialog(){
-            //判断改用户选择
-            var carInfo_id = $("input[name='id']:checked").val();
+        function toReserveCarDialog(){
+        	var carInfo_id = $("input[name='id']:checked").val();
             if(carInfo_id){
-            	//成功需要注意jquery的版本必须是1.7+以上
-	            var d = top.dialog({
-	                width:700,
-	                height:700,
-	                title: '更新汽车信息',
-	                url:'sys/toUpdateCarInfoAction.action?carInfo_id='+carInfo_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
-	                onclose: function () {
-	                if (this.returnValue=="success") {
-	                   // alert(this.returnValue);
-	                   //自动刷新
-	                   window.location.reload();
-	                }
-	
-	            }
-	            });
-	            d.showModal();
-            }else{// "" false null undefined 0
-            	alert("请选中一条记录进行操作!");
-                return;
-            }
-         }
-        
-        function toLogOff(){
-        	
-        	var radio = $("input[name='id']:checked");
-        	
-        	if(radio.val()){
-                var status = $.trim(radio.parent().parent().find("span").text());
-                if(status!="报废"){
-                    status="<font color='red'>报废</font>"
-                }else{
-                	status="<font color='green'>可租</font>"
+                //成功需要注意jquery的版本必须是1.7+以上
+                var d = top.dialog({
+                    width:700,
+                    height:200,
+                    title: '预定页面',
+                    url:'sys/toReserveCarInfoAction.action?carInfo_id='+carInfo_id,//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                    onclose: function () {
+                    if (this.returnValue=="success") {
+                       // alert(this.returnValue);
+                       //自动刷新
+                       window.location.reload();
+                    }
+    
                 }
-        	var d = top.dialog({
-			    title: '提示信息',
-			    content: '你是否要对该车进行'+status+'操作',
-			    okValue: '确定',
-			    ok: function () {
-			        this.title('提交中…');
-			          var params = {
-                            carInfo_id:radio.val()
-                        }
-			          $.post("sys/toUpdateStatusCarInfoAction.action",params,function(data){
-                            if(data.flag=="success"){
-                                alert(data.message);
-
-                                if($(status).text()=="可租"){
-                                  radio.parent().parent().find("span").css("color","green");
-                                  radio.parent().parent().find("span").html($(status).text());
-                                }else{
-                                  radio.parent().parent().find("span").css("color","red");
-                                  radio.parent().parent().find("span").html($(status).text());
-                                }
-                                return;
-                            }else{
-                                alert(data.message);
-                                return;
-                            }
-                        });
-			        
-			    },
-			    cancelValue: '取消',
-			    cancel: function () {}
-			});
-			d.show();
-        	}else{// "" false null undefined 0
+                });
+                d.showModal();
+            }else{// "" false null undefined 0
                 alert("请选中一条记录进行操作!");
                 return;
             }
         }
-        
+        	
     </script>
-
+    
 </head>
 
 <body>
@@ -227,12 +150,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<s:hidden name="pageBean.totalPages" id="total_pages"></s:hidden>
 				<s:hidden name="pageBean.pageNow" id="page_now"></s:hidden>
 			</form>
-			<!-- 其他操作 -->
-	        <ul class="seachform1">
-		        <li style="cursor: pointer;" onclick="toAddDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>添加</li>
-		        <li style="cursor: pointer;" onclick="toUpdateDialog()"><span><img src="<%=path %>/resource/admin/images/t02.png" /></span>编辑</li>
-		        <li style="cursor: pointer;" onclick="toLogOff()"><span><img src="<%=path %>/resource/admin/images/t05.png" /></span>变更</li>
-	        </ul>
 		    
        </div>
 	    
@@ -248,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <th>车辆保证金</th>
 			        <th>车辆类型</th>
 			        <th>状态</th>
-			        <th>详细信息</th>
+			        <th>预定</th>
 		        </tr>
 	        </thead>
         <tbody>
@@ -266,18 +183,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <s:if test="#carInfo.car_status==1">
 	                       <span style="color:green;font-weight:blod;">可租</span>
 	                    </s:if>
-	                    <s:elseif test="#carInfo.car_status==2">
-                            <span style="color:blue;font-weight:blod;">预定</span>
-	                    </s:elseif>
-	                    <s:elseif test="#carInfo.car_status==3">
-                            <span style="color:red;font-weight:blod;">报废</span>
-	                    </s:elseif>
-	                    <s:else>
-                            <span style="color:#CC9999;font-weight:blod;">租赁</span>
-	                    </s:else>
                     </td>
 		            
-		            <td><a href="javascript:void(0)" onclick="getCarInfo()">查看详情</a></td>
+		            <td><a href="javascript:void(0)" onclick="toReserveCarDialog()">预定</a></td>
 	            </tr> 
             </s:iterator>
         </tbody>

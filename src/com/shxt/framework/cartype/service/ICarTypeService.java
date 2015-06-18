@@ -27,6 +27,12 @@ public interface ICarTypeService {
 	 */
 	
 	public List<CarType> getEnableList(); 
+	/**
+	 * 得到启用子类型列表
+	 * @return
+	 */
+	
+	public List<CarType> getTypeList(Integer typeId); 
 
 	
 	/**

@@ -31,6 +31,16 @@ public class DictServiceImpl implements IDictService {
 		sql += " limit 5";
 		return  (List<User>) this.baseDao.listSQL(sql,UserDTO.class, false);
 	}
+
+	public List<AddressDict> getBrandList() {
+		String sql = "select ct.type_id id,ct.type_name name from car_type ct";
+		return (List<AddressDict>) this.baseDao.listSQL(sql, AddressDict.class, false);
+	}
+
+	public List<AddressDict> getTypeListByBraId(Integer bra_id) {
+		String sql = "select ct.type_id id,ct.type_name name from car_type ct where ct.parent_id=?";
+		return (List<AddressDict>) this.baseDao.listSQL(sql, bra_id, AddressDict.class, false);
+	}
 	
 
 }
