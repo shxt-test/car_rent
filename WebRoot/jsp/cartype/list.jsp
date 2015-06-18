@@ -76,7 +76,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 if(status=="禁用"){
                     alert("该品牌禁用，不能进行修改操作");
                     return false;
-                    
                 }
                 else{
                 var CarType_id = $("input[name='id']:checked").val();
@@ -100,10 +99,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
         }
         
-      //修改类型 
+      //修改品牌类型 
        function toUpdateTypeDialog(CarType_id){
              //成功需要注意jquery的版本必须是1.7+以上
-                    var d = top.dialog({
+               var radio = $("input[name='id']:checked");
+               if(radio.val()){
+                var status = $.trim(radio.parent().parent().find("span").text());
+                if(status=="禁用"){
+                    alert("该品牌禁用，不能进行修改操作");
+                    return false;
+                }else{
+                	 var d = top.dialog({
                         id:"rightFrame",
                         width:700,
                         height:350,
@@ -117,8 +123,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     }
                     });
                     d.showModal();
-        }
-    //删除品牌
+                }
+        }}
+      
+    //删除品牌没有用
        function toDelete(){
             
             if(!$("input[name='id']:checked").val()){
@@ -137,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
         function toChildShowWin(obj,CarType_id){
         	var content = '<a href="javascript:void(0)" onclick="toUpdateTypeDialog(\''+CarType_id+'\')"><font color="blue" >编辑</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
-                            +'<a href="javascript:void(0)" onclick="deleteChildDialog(\''+CarType_id+'\')"><font color="blue" >删除</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
+                            +'<a href="javascript:void(0)" onclick="deleteChildDialog(\''+CarType_id+'\')"><font color="blue" >变更</font></a>&nbsp;&nbsp;|&nbsp;&nbsp;'
                             +'<a href="javascript:void(0)" onclick="toLookTypeDialog(\''+CarType_id+'\')"><font color="blue" >查看</font></a>'
 				   var show_dialog = dialog({
 					 id:"show_dialog",
@@ -149,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
         }
         
-        //变更操作
+        //变更品牌操作
         function deleteParentDialog(){
         	 //判断改用户选择
             //  可以用struct标签获取id<s:property value="#session.session_user.user_id"/>
@@ -173,8 +181,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         }
                         $.post("sys/toUpdateStatusCarTypeAction.action",params,function(data){
                             if(data.flag=="success"){
-                                alert(data.message);
-
                                 if($(status).text()=="可用"){
                                   radio.parent().parent().find("span").css("color","green");
                                   radio.parent().parent().find("span").html($(status).text());
@@ -200,29 +206,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
         
+        //变更类型为启用
         function deleteChildDialog(CarType_id){
-                  if(window.confirm("你确定要删除该记录吗？")){
-                      $.get("sys/deleteChildCarTypeAction.action",{type_id:CarType_id},function(data){
-                         if(data.flag=="success"){
-                        var id =  "#child_"+CarType_id;
-                          $(id).slideUp("slow",function(){
-                        	  $(this).remove();
-                          })
-                            dialog.get("show_dialog").remove();
-                         } else{
-                             alert(data.message);
-                             return false;
-                         }
-                      });
+        	    var radio = $("input[name='id']:checked");
+               if(radio.val()){
+                var status = $.trim(radio.parent().parent().find("span").text());
+                if(status=="禁用"){
+                    alert("该品牌禁用，不能进行修改操作");
+                    return false;
+                }else{
+                     if(window.confirm("你确定要对该品牌类型进行变更操做吗？")){
+                         $.post("sys/toUpdateStatusCarTypeAction.action",{type_id:CarType_id},function(data){
+                            if(data.flag=="success"){
+                               window.location.reload();
+                                return;
+                            }else{
+                                alert(data.message);
+                                return;
+                            }
+                        });
                   }else{
-                	  dialog.get("show_dialog").remove();
+                      dialog.get("show_dialog").remove();
                   }
+                } 
+                }
+                 
         }
-     
+        
+        //统计信息
+       function tjDialog(){
+             //成功需要注意jquery的版本必须是1.7+以上
+                    var d = top.dialog({
+                        id:"rightFrame",
+                        width:700,
+                        height:350,
+                        title: '统计信息',
+                        url:'sys/tjTestCarTypeAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
+                        onclose: function () {
+                        if (this.returnValue=="success") {
+                           // alert(this.returnValue);
+                           window.location.reload();
+                        }
+                    }
+                    });
+                    d.showModal();
+        }
 </script>
-
-
-
 
 </head>
 
@@ -265,23 +294,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tr>
         <td><input name="id"  type="radio" value="${parent.type_id}" /></td>
         <td>${vs.count}</td>
-        <td>${parent.type_name}${parent.type_status}</td>
-        <td><img alt="" src="<%=path %>/resource/menu/${parent.icon}"></td>
+        <td>${parent.type_name}</td>
+        <td><img alt="" src="<%=path %>/upload/cartype/${parent.icon}"></td>
         <td>
             <c:forEach items="${parent.carTypeList}" var="child" varStatus="vs">
-                <a href="javascript:void(0)" id="child_${child.type_id}" onclick="toChildShowWin(this,${child.type_id})">${vs.count}.&nbsp;${child.type_name}</a>&nbsp;&nbsp;
+                    <c:if test="${child.type_status==1}">
+                     <a href="javascript:void(0)" id="child_${child.type_id}" onclick="toChildShowWin(this,${child.type_id})">${vs.count}.&nbsp;<font color="red">${child.type_name}</font></a>&nbsp;&nbsp;
+                    </c:if>
+                    <c:if test="${child.type_status==2}">
+                         <a href="javascript:void(0)" id="child_${child.type_id}" onclick="toChildShowWin(this,${child.type_id})">${vs.count}.&nbsp;${child.type_name}</a>&nbsp;&nbsp;
+                    </c:if>
             </c:forEach>
-        
         </td>
         <td >
-            <s:if test="#parent.type_status==2">
-                        <span style="color:red;font-weight:blod">禁用</span></s:if>
-                        <s:else><span style="color:green;font-weight:blod">可用</span></s:else>
+            <c:if test="${parent.type_status==1}">
+                  <span style="color:green;font-weight:blod;">可用</span>
+           </c:if>
+            <c:if test="${parent.type_status==2}" >
+                 <span style="color:red;font-weight:blod;">禁用</span>
+            </c:if>
         </td>
         </tr> 
        </c:forEach>
-        
-        
         </tbody>
     </table>
     </div>
