@@ -216,6 +216,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <li><label>类型</label>
 		                <select id="type" name="query.child_id" class="select_show">
 		                    <option value="">请选择类型</option>
+		                    <s:if test="query.parent_id!=null">
+                                
+                            </s:if>
 		                </select>
 		            </li>
 					<li>
