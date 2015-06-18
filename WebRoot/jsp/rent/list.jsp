@@ -244,7 +244,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <th>车辆颜色</th>
                     <th>购买价格</th>
                     <th>归还车辆</th>
-                    
                 </tr>
             </thead>
         <tbody>
