@@ -236,17 +236,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         cusInfoForm.submit();
     }
           
-      function test(){
-    	  var id_card=$("#id_card").val();
-    	 $.post("sys/testCustomerAction.action",{id_card:id_card},function(data){
-                if(data.flag!="success"){
-                    $("#message").css("color","red");
-                    $("#message").html(data.message);
-                    $("#message").focus();
-                    return;
-                }
-            });
-      }
+      
 
     </script>
 </head>
@@ -256,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="mformbody">
         <form action="sys/addCustomerAction.action" name="cusInfoForm" method="post" enctype="multipart/form-data">
         <ul class="mforminfo">
-            <li><label>身份证号码</label><input name="cusInfo.cus_id_card" id="id_card" type="text" class="mdfinput" onblur="test()" style="width: 400px;"  placeholder="必填"/><span id="message"></span></li>
+            <li><label>身份证号码</label><input name="cusInfo.cus_id_card" id="id_card" type="text" onblur="isIDno()" class="mdfinput" style="width: 400px;"  placeholder="必填"/><span id="message"></span></li>
             <li><label>姓名</label><input name="cusInfo.cus_name" id="cus_name" type="text" class="mdfinput"  placeholder="必填"/><span id="cus_name_message"></span></li>
             <li><label>家庭住址</label><input name="cusInfo.cus_address" id="cus_address" type="text" class="mdfinput" /></li>
             <li><label>工作单位</label><input name="cusInfo.cus_work_address" id=" cus_work_address" type="text" class="mdfinput" /></li>
@@ -271,7 +261,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <s:select name="cusInfo.customer_type.c_type_id" id="c_type_id" list="cusTypeList" listKey="c_type_id"
            listValue="c_type_name" cssClass="select_show" headerKey="" headerValue="请选择用户"></s:select>
             </li> 
-        <li>---------------------------------------------担保人信息-----------------------------------------------------</li>
+        <li>---------------------------------------担保人信息-----------------------------------------------------</li>
             <li><label>身份证号码</label><input name="cusInfo.gua_id_card" id="gua_id_card" type="text" class="mdfinput" style="width: 400px;" onblur="isIDno()"/><span id="gua_message"></span></li>
             <li><label>姓名</label><input name="cusInfo.gua_name" id="gua_name" type="text" class="mdfinput" /></li>
              <li><label>性别</label>
@@ -280,11 +270,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ></s:select>
             <li><label>家庭住址</label><input name="cusInfo.gua_address" id="gua_address" type="text" class="mdfinput" /></li>
             <li><label>工作单位</label><input name="cusInfo.gua_work_address" id=" gua_work_address" type="text" class="mdfinput" /></li>
-            <li><label>联系方式</label><input name="cusInfo.gua_tel" id="gua_tel" type="text" class="mdfinput" /><span id="gua_telmessage"></span></li>
+            <li><label>联系方式</label><input name="cusInfo.gua_tel" id="gua_tel" type="text" class="mdfinput" placeholder="必填"/><span id="gua_telmessage"></span></li>
             <li><label>驾驶证号码</label><input name="cusInfo.gua_driver_code" id="gua_driver_code" type="text" class="mdfinput" /></li>
             <li><label>与担保人关系</label><input name="cusInfo.relation" id="relation" type="text" class="mdfinput" /></li>
             </ul>
-            <li><label>&nbsp;</label><input   type="button" onclick="add()" class="mbtn" value="确认保存"/></li>
+            <li><label>&nbsp;</label><input  type="button" onclick="add()" class="mbtn" value="确认保存"/></li>
         </form>
     </div>
 </body>

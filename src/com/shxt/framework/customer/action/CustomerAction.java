@@ -25,8 +25,6 @@ public class CustomerAction extends BaseAction {
 	private CustomerQuery query;
 	
 	private Integer cus_id;
-	
-	private String id_card; 
 
 	private ICustomerService customerService;
 		public void setCustomerService(ICustomerService customerService) {
@@ -43,7 +41,6 @@ public class CustomerAction extends BaseAction {
 		if(pageBean==null){
 			pageBean = new PageBean();
 		}
-		cusTypeList = customerTypeService.list();
 		this.pageBean = customerService.find(query, pageBean);
 		this.toJsp="customer/list";
 		return DISPATCHER;
@@ -117,6 +114,7 @@ public class CustomerAction extends BaseAction {
 	 * @return
 	 */
 	public String toUpdateStatus(){
+		System.out.println(1);
 
 		Map<String , Object> map = new HashMap<String, Object>();
 		try {
@@ -141,21 +139,6 @@ public class CustomerAction extends BaseAction {
 		this.toJsp="customer/lookGua";
 		return DISPATCHER;
 		
-	}
-	
-	public String test(){
-		Map<String,Object> map = new HashMap<String,Object>();
-			Long count = customerService.getTest(id_card);
-			if(count>0){
-				map.put("flag","error");
-				map.put("message", "该省份证已拥被注册");
-			}else{
-				map.put("flag","success");
-			}
-		
-	
-		jsonResult=map;
-		return JSON;
 	}
 
 	public PageBean getPageBean() {
@@ -198,14 +181,6 @@ public class CustomerAction extends BaseAction {
 
 	public void setCusTypeList(List<CustomerType> cusTypeList) {
 		this.cusTypeList = cusTypeList;
-	}
-
-	public String getId_card() {
-		return id_card;
-	}
-
-	public void setId_card(String idCard) {
-		id_card = idCard;
 	}
 
 	

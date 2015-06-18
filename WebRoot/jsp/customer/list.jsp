@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //成功需要注意jquery的版本必须是1.7+以上
             var d = top.dialog({
                 width:700,
-                height:600,
+                height:700,
                 title: '新建客户',
                 url:'sys/toAddCustomerAction.action',//可以是一个访问路径Action|Servlet等或者jsp页面资源
                 onclose: function () {
@@ -74,6 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    //自动刷新
                    window.location.reload();
                 }
+
             }
             });
             d.showModal();
@@ -222,16 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <label>省份证号码</label>
                            <s:textfield name="query.cus_id_card" cssClass="scinput" />
                     </li>
-                        <li>
-                        <label>性别</label>
-                        <s:select cssClass="select_show" list="#{'男':'男','女':'女'}"
-                            name="query.cus_sex" headerKey="" headerValue="选择性别"></s:select>
-                    </li>
-                    <li><label>客户类型</label>
-                         <s:select name="query.customer_type" id="c_type_id" list="cusTypeList" listKey="c_type_id"
-                         listValue="c_type_name" cssClass="select_show" headerKey="" headerValue="请选择用户"></s:select>
-                     </li> 
-                        
+
                     <li>
                         <label>&nbsp</label>
                         <input type="button" class="scbtn" value="查询"

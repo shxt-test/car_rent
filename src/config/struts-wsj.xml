@@ -4,9 +4,14 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    
-    
-
-   
-
+    <package name="wsj" namespace="/sys" extends="shxt-default">
+    <!-- 汽车类型 -->
+        <action name="*CustomerTypeAction" class="customerTypeAction" method="{1}">
+            <result name="dispatcher">/jsp/${toJsp}.jsp</result>
+            <result name="redirect" type="redirect">/jsp/${toJsp}.jsp</result>
+            <result name="json" type="json">
+                 <param name="root">jsonResult</param>
+            </result>
+        </action>
+     </package>   
 </struts>

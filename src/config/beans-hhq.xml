@@ -23,11 +23,8 @@
             <property name="customerService" ref="customerServiceImpl"></property>
             <property name="customerTypeService" ref="customerTypeServiceImpl"></property>
         </bean>
-        <bean id="rentServiceImpl" class="com.shxt.framework.rent.service.RentServiceImpl">
-            <property name="baseDao" ref="baseDaoImpl"></property>
-        </bean>
         <bean id="rentAction" class="com.shxt.framework.rent.action.RentAction" scope="prototype">
-            <property name="rentService" ref="rentServiceImpl"></property>
+        
         </bean>
 
 </beans>

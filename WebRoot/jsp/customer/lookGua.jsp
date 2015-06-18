@@ -220,7 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li><label>身份证号码</label><input readonly="readonly" name="cusInfo.gua_id_card" id="gua_id_card" type="text" class="mdfinput" style="width: 400px;" onblur="isIDno()" value="${cusInfo.gua_id_card}"/><span id="message"></span></li>
             <li><label>姓名</label><input readonly="readonly" name="cusInfo.gua_name" id="gua_name" type="text" class="mdfinput" value="${cusInfo.gua_name}"/></li>
             <li><label>家庭住址</label><input readonly="readonly" name="cusInfo.gua_address" id="gua_address" type="text" class="mdfinput" value="${cusInfo.gua_address}"/></li>
-            <li><label>工作单位</label><input readonly="readonly"  name="cusInfo.gua_work_address" id=" gua_work_address" type="text" class="mdfinput" value="${cusInfo.gua_work_address}"/></li>
+            <li><label>工作单位</label><input readonly="readonly"  name="cusInfo.gua_work_address" id=" gua_work_address" type="text" class="mdfinput" value="${cusInfo.cus_work_address}"/></li>
             <li><label>联系方式</label><input readonly="readonly" name="cusInfo.gua_tel" id="gua_tel" type="text" class="mdfinput" onblur="checkMobile()" value="${cusInfo.gua_tel}"/><span id="telmessage"></span></li>
             <li><label>与客户关系</label><input readonly="readonly" name="cusInfo.relation" id="relation" type="text" class="mdfinput" value="${cusInfo.relation}" /></li>
             </ul>

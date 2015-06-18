@@ -1,7 +1,6 @@
 
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -69,16 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             if(!$("input[name='id']:checked").val()){
                 alert("请选中一条记录进行操作")
                 return false;
-            }
-              var radio = $("input[name='id']:checked");
-               if(radio.val()){
-                var status = $.trim(radio.parent().parent().find("span").text());
-                if(status=="禁用"){
-                    alert("该品牌禁用，不能进行修改操作");
-                    return false;
-                    
-                }
-                else{
+            }else{
                 var CarType_id = $("input[name='id']:checked").val();
              //成功需要注意jquery的版本必须是1.7+以上
                     var d = top.dialog({
@@ -96,8 +86,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     });
                     d.showModal();
             }
-            }
-         
         }
         
       //修改类型 
@@ -149,54 +137,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
         }
         
-        //变更操作
+        
         function deleteParentDialog(){
-        	 //判断改用户选择
-            //  可以用struct标签获取id<s:property value="#session.session_user.user_id"/>
-            var radio = $("input[name='id']:checked");
-               if(radio.val()){
-                var status = $.trim(radio.parent().parent().find("span").text());
-                if(status=="可用"){
-                    status="<font color='red'>禁用</font>"
-                }else{
-                    status="<font color='red'>可用</font>"
-                    
-                }
-                var d = top.dialog({
-                    title: '提示信息',
-                    content: '你是否要对改品牌进行'+status+'操作吗?',
-                    okValue: '确定',
-                    ok: function () {
-                        this.title('提交中…');
-                        var params = {
-                            type_id:radio.val()
-                        }
-                        $.post("sys/toUpdateStatusCarTypeAction.action",params,function(data){
-                            if(data.flag=="success"){
-                                alert(data.message);
-
-                                if($(status).text()=="可用"){
-                                  radio.parent().parent().find("span").css("color","green");
-                                  radio.parent().parent().find("span").html($(status).text());
-                                }else{
-                                  radio.parent().parent().find("span").css("color","red");
-                                  radio.parent().parent().find("span").html($(status).text());
-                                }
-                                return;
-                            }else{
-                                alert(data.message);
-                                return;
-                            }
-                        });
-                       
-                    },
-                    cancelValue: '取消',
-                    cancel: function () {}
-                });
-                d.showModal();
+        	var CarType_id =$("input[name='id']:checked").val();
+        	  if(CarType_id){
+        		  if(window.confirm("你确定要删除该记录吗？")){
+        			  $.get("sys/deleteParentCarTypeAction.action",{type_id:CarType_id},function(data){
+        				  if(data.flag=="success"){
+        					 var radio = $("input[name='id']:checked");
+        					 radio.parent().parent().hide("slow",function(){
+        						 $(this).remove();
+        					 })
+        				 } else{
+        					 alert(data.message);
+        					 return false;
+        				 }
+        			  });
+        			  
+        		  }
             }else{
-                alert("请选中一条记录进行操作!");
-                return;
+            	alert("请选择一条记录进行删除");
+            	return false;
             }
         }
         
@@ -239,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="toolbar">
         <li class="click" onclick="toAddDialog()"><span><img src="<%=path %>/resource/admin/images/t01.png" /></span>添加品牌</li>
         <li class="click" onclick="toUpdateDialog()"><span><img src="<%=path %>/resource/admin/images/t02.png" /></span>修改</li>
-        <li class="click" onclick="deleteParentDialog()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>变更</li>
+        <li class="click" onclick="deleteParentDialog()"><span><img src="<%=path %>/resource/admin/images/t03.png" /></span>删除</li>
         <li class="click" onclick="tjDialog()"><span><img src="<%=path %>/resource/admin/images/t04.png" /></span>统计</li>
         </ul>
         <ul class="toolbar1">
@@ -257,7 +218,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <th>汽车名称</th>
         <th>图标</th>
         <th>子菜单</th>
-        <th>状态</th>
         </tr>
         </thead>
         <tbody>
@@ -265,18 +225,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tr>
         <td><input name="id"  type="radio" value="${parent.type_id}" /></td>
         <td>${vs.count}</td>
-        <td>${parent.type_name}${parent.type_status}</td>
+        <td>${parent.type_name}</td>
         <td><img alt="" src="<%=path %>/resource/menu/${parent.icon}"></td>
         <td>
             <c:forEach items="${parent.carTypeList}" var="child" varStatus="vs">
                 <a href="javascript:void(0)" id="child_${child.type_id}" onclick="toChildShowWin(this,${child.type_id})">${vs.count}.&nbsp;${child.type_name}</a>&nbsp;&nbsp;
             </c:forEach>
         
-        </td>
-        <td >
-            <s:if test="#parent.type_status==2">
-                        <span style="color:red;font-weight:blod">禁用</span></s:if>
-                        <s:else><span style="color:green;font-weight:blod">可用</span></s:else>
         </td>
         </tr> 
        </c:forEach>

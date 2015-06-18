@@ -2,6 +2,7 @@ package com.shxt.framework.cartype.service;
 
 import java.util.List;
 
+import com.shxt.base.model.CharDatas;
 import com.shxt.framework.cartype.model.CarType;
 import com.shxt.framework.dto.CarTypeDTO;
 import com.shxt.framework.dto.MenuDTO;
@@ -27,6 +28,12 @@ public interface ICarTypeService {
 	 */
 	
 	public List<CarType> getEnableList(); 
+	/**
+	 * 得到启用子类型列表
+	 * @return
+	 */
+	
+	public List<CarType> getTypeList(Integer typeId); 
 
 	
 	/**
@@ -35,6 +42,7 @@ public interface ICarTypeService {
 	 * @return
 	 */
 	public List<CarType> getChildNodeByCarTypeId(Integer typeId);
+	public List<CarType> getChildCarType(Integer typeId);
 	/**
 	 * 通过角色获取该角色下已拥有的菜单信息
 	 * @param role_id
@@ -62,15 +70,12 @@ public interface ICarTypeService {
 	 * @return
 	 */
 	public CarType find(Integer type_id);
-	/**
-	 * 更改品牌状态
-	 * @param type_id
-	 */
-	public void updatestatus(Integer type_id);
+	
 	public void update(CarType carType);
 	public void deleteParent(Integer type_id);
 	public void addChild(CarType carType);
 	public void deleteChild(Integer type_id);
 	public List<CarType> getBrandNodeAll();
 	public Long getCheckCarTypeName(String typeName);
+	public List<CharDatas> getCharDatas();
 }

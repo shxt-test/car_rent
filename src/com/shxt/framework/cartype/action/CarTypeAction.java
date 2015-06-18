@@ -1,16 +1,21 @@
 package com.shxt.framework.cartype.action;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.shxt.base.action.BaseAction;
 import com.shxt.base.exception.RbacException;
@@ -99,7 +104,7 @@ public class CarTypeAction extends BaseAction {
 				
 				FileUtils.copyFile(photo, newFile);
 				
-				//carType.setPhoto(saveName);
+				carType.setIcon(saveName);
 			}
 			carTypeService.update(carType);
 			this.message="用户修改成功";
@@ -125,6 +130,14 @@ public class CarTypeAction extends BaseAction {
 		this.jsonResult=map;
 		return JSON;
 	}
+	
+	public String toCheckType(){
+		Map<String,Object> map=new HashMap<String,Object>();
+		childNodeList=this.carTypeService.getChildCarType(type_id);
+		map.put("flag", childNodeList);
+		this.jsonResult=map;
+		return JSON;
+	}
 	/**
 	 * 删除汽车类型
 	 * @return
@@ -141,25 +154,6 @@ public class CarTypeAction extends BaseAction {
 			map.put("message",e.getMessage());
 		}
 		this.jsonResult = map;
-		return JSON;
-	}
-	
-	/**
-	 * 变更状态
-	 * @return
-	 */
-	public String toUpdateStatus(){
-			Map<String,Object> map=new HashMap<String,Object>();
-		try {
-			carTypeService.updatestatus(type_id);
-			map.put("flag", "success");
-			map.put("message", "您的变更成功");
-		}catch (Exception e) {
-			map.put("flag", "error");
-			map.put("message", "您的变更失败，请联系管理员");
-			e.getMessage();
-		}
-		this.jsonResult=map;
 		return JSON;
 	}
 	
@@ -200,6 +194,54 @@ public class CarTypeAction extends BaseAction {
 		}
 		this.jsonResult = map;
 		return JSON;
+	}
+	
+	/**
+	 * 统计测试
+	 * @return
+	 */
+	public String tjTest(){
+		this.toJsp = "cartype/tj_test";
+		return REDIRECT;
+	}
+	
+	public String tjDataJSON(){
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("test/html;charset=UTF-8");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			
+			Map<String , Object> mapsx = new HashMap<String , Object>();
+			
+			mapsx.put("bgcolor", "FFFFFF");
+			mapsx.put("bgalpha", "100");
+			mapsx.put("caption", "汽车统计");
+			mapsx.put("subcaption", "副标题");
+			mapsx.put("numberprefix", "总共");
+			mapsx.put("numberSuffix", "辆");
+			mapsx.put("is2d", "1");
+			mapsx.put("issliced", "1");
+			mapsx.put("showplotborder", "1");
+			mapsx.put("plotborderthickness", "1");
+			mapsx.put("plotborderalpha", "100");
+			mapsx.put("plotbordercolor", "FFFFFF");
+			mapsx.put("enablesmartlabels", "1");
+			mapsx.put("showborder", "0");
+			
+			Map<String, Object> jsonMap = new HashMap<String,Object>();
+			jsonMap.put("chart", mapsx);
+			jsonMap.put("data",this.carTypeService.getCharDatas());
+			Gson gson = new Gson();
+			out.write(gson.toJson(jsonMap));
+			
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return NONE;
 	}
 	public List<CarType> getParentNodeList() {
 		return parentNodeList;

@@ -36,7 +36,7 @@
                 <comment>购买时价格</comment>
             </column>
         </property>
-        <property name="deposit" type="string">
+        <property name="deposit" type="integer">
             <column name="deposit" length="10">
                 <comment>押金默认1000</comment>
             </column>

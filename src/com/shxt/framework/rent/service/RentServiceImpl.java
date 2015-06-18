@@ -20,11 +20,13 @@ public class RentServiceImpl implements IRentService {
 	 * 列出未归还的汽车
 	 */
 	public PageBean find(Query query,PageBean pageBean) {
+		System.out.println(111);
 		String hql = "from RentInfo where real_date=null";
 		if(query!=null){
 			hql +=" and car_code like '"+query.getCar_code().trim()+"%'";
 		}
 		hql +=" order by car_code desc";
+		System.out.println(hql);
 		return this.baseDao.find(hql, pageBean);
 	}
 	

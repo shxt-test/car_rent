@@ -11,7 +11,5 @@ public class Query {
 	public void setCar_code(String carCode) {
 		car_code = carCode;
 	}
-	
-	
 
 }

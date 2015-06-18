@@ -29,39 +29,18 @@ public class CustomerTypeAction extends BaseAction{
 			
 			customerType.setPhoto(this.getSaveName());
 			customerTypeService.add(customerType);
-			this.message = "客户类型添加成功";
-			this.flag = "success";
+			
+			map.put("message","客户类型添加成功");
+			map.put("flag","success");
 		} catch (Exception e) {
 			e.printStackTrace();
-			this.message = "客户类型添加失败"+e.getMessage();
-			this.flag = "error";
+			map.put("message","客户类型添加失败,异常信息为:"+e.getMessage());
+			map.put("flag","error");
 		}
-		this.toJsp = "message";
-		return DISPATCHER;
+		this.jsonResult = map;
+		return JSON;
 	}
-	public String toUpdate(){
-		System.out.println(c_type_id);
-		customerType = this.customerTypeService.getCustomerTypeById(c_type_id);
-		this.toJsp = "customertype/update";
-		
-		return DISPATCHER;
-	}
-	public String update(){
-		Map<String,Object> map = new HashMap<String,Object>();
-		try {
-			System.out.println(this.getSaveName());
-			customerType.setPhoto(this.getSaveName());
-			this.customerTypeService.update(customerType);
-			this.message="客户类型修改成功";
-			this.flag="success";
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.message="客户类型修改失败,异常信息为:"+e.getMessage();
-			this.flag="error";
-		}
-		this.toJsp = "message";
-		return DISPATCHER;
-	}
+	
 	public String toAdd(){
 		
 		this.toJsp = "customertype/add";
@@ -71,6 +50,7 @@ public class CustomerTypeAction extends BaseAction{
 	
 	public String list(){
 		try {
+			System.out.println("123");
 			typeList = this.customerTypeService.list();
 			this.toJsp = "customertype/list";
 		} catch (Exception e) {
@@ -81,21 +61,7 @@ public class CustomerTypeAction extends BaseAction{
 		
 		return DISPATCHER;
 	}
-	public String delete(){
-		try {
-		customerTypeService.delete(c_type_id);
-		
-			this.message = "删除成功";
-			this.flag = "success";
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.message = "删除失败，异常信息为"+e.getMessage();
-			this.flag = "error";
-		}
-		this.toJsp = "message";
-		
-		return DISPATCHER;
-	}
+	
 	public Integer getC_type_id() {
 		return c_type_id;
 	}

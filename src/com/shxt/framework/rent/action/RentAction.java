@@ -1,6 +1,5 @@
 package com.shxt.framework.rent.action;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.shxt.base.action.BaseAction;

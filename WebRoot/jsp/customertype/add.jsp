@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 if(data.flag=="success"){
                          var dialog = top.dialog.get(window);
-                          dialog.close(data.flag);
+                          dialog.close(data.message);
                           dialog.remove();
                           
                 }else{
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body>
     <div class="formbody">
-    <form  action="sys/addCustomerTypeAction.action" method="post" id="customertypeForm" enctype="multipart/form-data">
+    <form  id="customertypeForm" enctype="multipart/form-data">
     <ul class="forminfo">
         <li><label>类型名称</label><input name="customerType.c_type_name" type="text" class="dfinput"/><i>名称不能超过30个字符</i></li>
         <li><label>打折率</label><input name="customerType.c_discount" type="text" class="dfinput"/><i>多个关键字用,隔开</i></li>
@@ -102,9 +102,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
             </li>
             <li style="width: 350px;height: 170px;">
-                <div id="localImag"><img id="preview" src="<%=path%>/upload/customertype/default.png"/></div>
+                <div id="localImag"><img id="preview" src="<%=path%>/upload/user/guest.png"/></div>
             </li>
-    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存" /></li>
+    <li><label>&nbsp;</label><input name="" type="button" class="btn" value="确认保存" onclick="toSub();"/></li>
     </ul>
     </form>
 
