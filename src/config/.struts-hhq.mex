@@ -10,7 +10,7 @@
       </result>
       <result name="json" />
     </action>
-    <action name="RentAction" location="0,0" size="0,0">
+    <action name="*RentAction" location="0,0" size="0,0">
       <result name="dispatcher">
         <resourceEdge source="dispatcher" routing="0" target="${toJsp}.jsp" />
       </result>

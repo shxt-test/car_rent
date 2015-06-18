@@ -13,7 +13,6 @@
                 <param name="root">jsonResult</param>
             </result>
         </action>
-        
         <action name="*RentAction" class="rentAction" method="{1}">
             <result name="dispatcher">/jsp/${toJsp}.jsp</result>
             <result name="redirect" type="redirect">/jsp/${toJsp}.jsp</result>
